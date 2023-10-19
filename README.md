@@ -8,6 +8,7 @@ Nowadays, most Internet of Things (IoT) devices still operate on batteries, offe
 ![Figure11](https://github.com/LuckyMan23129/Flute/assets/141725842/cfe9bf0a-529b-48e2-bc80-37559d8d2dcd)
 **Fig 1.  Block diagram of the Flute PnP power board**
 
+
 ![Figure2](https://github.com/LuckyMan23129/Flute/assets/141725842/38830606-cbdd-4c90-a091-20c9ea03b0f8)
 **Fig. 2: The Flute Hardware/Software Architecture**
 
@@ -54,6 +55,26 @@ Energy drought listing of AsTAR++ is shown as follows:
 ![Biểu đồ không có tiêu đề drawio](https://github.com/LuckyMan23129/Flute/assets/141725842/6bff642e-8ed6-4e80-9e45-cfac93b6b6cc)
 ****Fig. 3: Prototype Flute board (left) and finished battery-free EH nodes (right)****
 
+
+
+## Contributing
+Contributions of this paper facilitate the vision of a battery-free EH IoT by enabling PnP conversion of commodity dev-boards into battery-free EH platforms. A week-long evaluation of our approach shows a promising performance profile. Specifically, Flute sustainably supports simple wireless sensing applications in both indoor and outdoor scenarios running on multiple networks and processors using solar power alone. Moreover, with diurnal operation, Flute outperforms the original AsTAR algorithm by a factor of 2x to 17x while always maintaining a 10% safety margin, well over the brown-out voltage.
+
+## Future work
+Our future work will focus on three scientific tracks: (i.) Improving self-adaptive energy management by broadening its scope beyond the application layer and integrating it into the OS and network. (ii.) Implementing approaches to simplify developer construction of complex multi-tasking schedules. (iii.) Broadening Flute evaluation to include more EH methods like thermal, RF and kinetic. Additionally, as an engineering track, we intend to establish large-scale Flute deployments in multiple locations for a year-long study across seasons.
+
+## Authors and acknowledgment
+This work is partially funded by VLIR-UOS for the IUC-QNU/KU Leuven project (VN2022IUC044A101), the KU Leuven Research fund and the VLAIO TRUSTI project.
+
+
+
+
+
+
+
+
+
+
 ## Installation
 Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a 
 '''
@@ -82,6 +103,19 @@ function App() {
   return <Component />
 }
 ```
+
+
+## Experimental results
+**Table 1: User-defined energy drought task rates for AsTAR++**
+<img width="483" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/8ea61d9f-45ca-4796-9178-c60454f34f43">
+
+**Table 2: 1-week Flute message rate metrics for AsTAR and AsTAR++ across two deployment locations**
+![Table 2](https://github.com/LuckyMan23129/Flute/assets/141725842/5b94967a-6a0d-4e9b-a337-eb3f80b3c89a)
+
+![Fig 4](https://github.com/LuckyMan23129/Flute/assets/141725842/3fabbabe-a1c9-4904-abe5-f9065f58ecdd)
+![Fig 5](https://github.com/LuckyMan23129/Flute/assets/141725842/a6b589f4-4324-4737-80c4-a8259c84928d)
+
+
 
 ## Contributing
 State if you are open to contributions and what your requirements are for accepting them.
