@@ -73,7 +73,7 @@ The parameters of the proposed algorithms is described on Table 1 as follows:
 
 
 ### 3.1. Applying the proposed AsTAR++ algorithm  on LTE-M nodes
-In this application, the circuitdojo_feather_nrf9160 board is used.
+For LTE_M nodes , the circuitdojo_feather_nrf9160 board is used.
 
 <img width="400" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/8e5c1a75-011e-4c58-9604-d834a3b9f65b"> <img width="400" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/c5457a4d-94c8-4a32-a166-e696c6b28684">
 
