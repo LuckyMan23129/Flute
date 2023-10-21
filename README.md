@@ -19,7 +19,11 @@ environments
 ![Figure2](https://github.com/LuckyMan23129/Flute/assets/141725842/38830606-cbdd-4c90-a091-20c9ea03b0f8)
 **Fig 2. The Flute Hardware/Software Architecture**
 
- The hardware goal of Flute is to convert commodity IoT development boards into battery-free EH devices. Flute’s software goal is to schedule tasks: (i.) as frequently as possible, while (ii.) accumulating an optimum charge level and (iii.) preserving system operation by throttling execution when environmental energy is lost. This requires a PnP power supply board and software support to manage energy usage. The Psuedo code of proposed algorithms is shown as follows.
+ The hardware goal of Flute is to convert commodity IoT development boards into battery-free EH devices. Flute’s software goal is to schedule tasks: (i.) as frequently as possible, while (ii.) accumulating an optimum charge level and (iii.) preserving system operation by throttling execution when environmental energy is lost. This requires a PnP power supply board and software support to manage energy usage.
+
+## 3. Installation and Sourcecode
+Flute aims to convert commodity IoT development boards into battery-free EH devices that can work in either outdoor or indoor environments reliably. To validate this, we employed long-range networking, 433MHz LoRa, and LTE-M, parameterized for low power and extended coverage. To show its deployment in the real world, we deployed Flute both outdoors and indoors and in 2 different countries in 2 different continents Vietnam and Belgium.
+The Psuedo code of proposed algorithms is shown as follows.
 ```javascript
 1    getAdaptedRate ( V_New , V_Prev ) {
 2    IF ( V_New - V_Prev ) < 0 for last 10 minutes AND V_New <=
@@ -58,10 +62,7 @@ environments
 34   }
 ```
 Flute uses proposed AsTAR++ algorithm which manages energy droughts by tracking the duration of power outages using an Exponentially Weighted Moving Average. When an energy drought is detected based on 10 minutes of no charge gain (e.g. sunset), Flute changes strategies, aiming to schedule tasks at such a rate that 90% of the available charge is used by the expected end of the energy drought (e.g. sunrise). Once charge accumulation resumes, Flute reverts to the standard, conservative, AsTAR strategy. In this way, available energy is more fully exploited overnight.
-
-## 3. Source code and Installation
-Flute aims to convert commodity IoT development boards into battery-free EH devices that can work in either outdoor or indoor environments reliably. To validate this, we employed long-range networking, 433MHz LoRa, and LTE-M, parameterized for low power and extended coverage. To show its deployment in the real world, we deployed Flute both outdoors and indoors and in 2 different countries in continents Vietnam and Belgium.
-### 3.1. LTE-M nodes
+### 3.1. Applying the proposed AsTAR++ algorithm  on LTE-M nodes
 In this application, the circuitdojo_feather_nrf9160 board is used.
 
 <img width="500" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/8e5c1a75-011e-4c58-9604-d834a3b9f65b"> <img width="500" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/c5457a4d-94c8-4a32-a166-e696c6b28684">
@@ -88,34 +89,18 @@ It features a Nordic Semiconductor nRF9160-SICA part. This part is capable of bo
 
 Besides, tutorials from Nordic (see also at https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/topic/gpio-generic-api/) will give you basic backgrounds so that you can start implementing a zephyr Project for a Circuitdojo circuitdojo_feather_nrf9160.
 
-In our work, we offer a reference code for outdoor and indoor LTE-M Node shown at: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M that can help everyone on it to develop a Battery-free IoT application easily. 
+In our work, we offer a reference code for outdoor and indoor LTE-M Node available at: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M that can help everyone on it to develop a Battery-free IoT application easily. 
 LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency.
-### 3.2. 433Mhz nodes
+
+### 3.2. Applying the proposed AsTAR++ algorithm  on 433Mhz nodes
 Similar to LTE-M nodes, the reference source code for outdoor and indoor LoRa 433MHz is also described in a GitHub as follows: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B 
 
-Reference implementations are available for the Arduino development environments
-
-
-
-
-
-
-
-
-
-
-
-
-## 3. Implementation
-### 3.1 Hardware Implementation
-![Biểu đồ không có tiêu đề drawio](https://github.com/LuckyMan23129/Flute/assets/141725842/6bff642e-8ed6-4e80-9e45-cfac93b6b6cc) 
-****Fig. 3: Prototype Flute board (left) and finished battery-free EH nodes (right)****
-### 3.2. Software Implementation
-AsTAR++ Algorithm is shown as follows:
-
+Reference implementations are available for the Arduino development environments .............
 
 
 ## 4. Experimental results
+![Biểu đồ không có tiêu đề drawio](https://github.com/LuckyMan23129/Flute/assets/141725842/6bff642e-8ed6-4e80-9e45-cfac93b6b6cc) 
+****Fig. 3: Prototype Flute board (left) and finished battery-free EH nodes (right)****
 We evaluate the performance of Flute using two IoT daughter-boards described in Section 4 through a 7-day test deployed in Vietnam and Belgium under outdoor and indoor conditions. The boards were connected and ran the Flute software locally. Each of the 7-day experiment was performed at a different time,
 therefore absolute results of the graphs cannot be directly compared due to changing energy availability. However, the relative trends remain clear. From the results shown in Figures 4 and 5, label (A) denotes the maximumVoltage, (B) optimumVoltage, (C) shutOffVoltage plus a 10% safety margin and (D) NightOptimumVoltage, respectively. For the sleep time (E) represents maximumSleepTime, (F) nightMinimumSleepTime and (G) minimumSleepTime, respectively.
 ### 4.1. Outdoor Operation
@@ -131,9 +116,10 @@ Critically, Flute availability remains unaffected, delivering 100% using both al
 ![Table 2](https://github.com/LuckyMan23129/Flute/assets/141725842/5b94967a-6a0d-4e9b-a337-eb3f80b3c89a)
 
 ![Fig 4](https://github.com/LuckyMan23129/Flute/assets/141725842/3fabbabe-a1c9-4904-abe5-f9065f58ecdd)
-![Fig 5](https://github.com/LuckyMan23129/Flute/assets/141725842/a6b589f4-4324-4737-80c4-a8259c84928d)
 
 ### 4.2. Indoor Operation
+![Fig 5](https://github.com/LuckyMan23129/Flute/assets/141725842/a6b589f4-4324-4737-80c4-a8259c84928d)
+
 Figure 5 shows Flute indoor performance across the two locations. The indoor nodes received sunlight for just a few hours daily. Specifically, the nodes were deployed in summer of 2023 with many days of rain and inside of laboratories opening briefly without artificial lightening. Annotations (A) through (G) remain the same. The graphs 
 how that AsTAR and AsTAR++ algorithms ensure sustainable operation even with reduced amount of harvested solar energy when indoors. Additionally, AsTAR++ significantly outperforms AsTAR through more aggressive overnight energy use, without negatively impacting device availability.
 As shown in Table 2, with AsTAR, LoRa nodes achieve an average 0.51 messages per hour indoor and 2.47 outdoor. AsTAR++ improves messaging rate by over 16x for indoor and 5x for outdoor, respectively. With AsTAR, LTE-M nodes achieve an average 0.53 messages per hour while indoor and 6.84 outdoor. Again, AsTAR++ improves messaging by over 1.7x for indoor and 2.2x for outdoor.
@@ -147,80 +133,4 @@ Our future work will focus on three scientific tracks: (i.) Improving self-adapt
 ## 7. Authors and acknowledgment
 This work is partially funded by VLIR-UOS (IUC-QNU/KU Leuven, VN2022IUC044A101), the KU Leuven Research Fund (ReSOS, C3/20/014), and VLAIO
 (TRUSTI, HBC.2021.0742).
-
-============================== The end ==============================
-
-*
-*
-*
-*
-*
-*
-*
-End
-
-*
-*
-*
-*
-*
-*
-*
-
-
-
-
-
-
-
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a 
-'''
-Requirements subsection.
-'''
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Deployment
-```bash
-  npm run deploy
-```
-
-## Usage/Examples
-
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
-```
-
-
-
-
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
-
 
