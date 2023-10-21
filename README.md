@@ -62,6 +62,15 @@ The Psuedo code of proposed algorithms is shown as follows.
 34   }
 ```
 Flute uses proposed AsTAR++ algorithm which manages energy droughts by tracking the duration of power outages using an Exponentially Weighted Moving Average. When an energy drought is detected based on 10 minutes of no charge gain (e.g. sunset), Flute changes strategies, aiming to schedule tasks at such a rate that 90% of the available charge is used by the expected end of the energy drought (e.g. sunrise). Once charge accumulation resumes, Flute reverts to the standard, conservative, AsTAR strategy. In this way, available energy is more fully exploited overnight.
+
+The parameters of the proposed algorithms is described on Table 1 as follows:
+
+**Table 1: User-defined energy drought task rates for AsTAR++**
+<img width="600" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/12d5ea07-117e-4704-9371-36fcdc00ac64">
+
+
+
+
 ### 3.1. Applying the proposed AsTAR++ algorithm  on LTE-M nodes
 In this application, the circuitdojo_feather_nrf9160 board is used.
 
@@ -103,24 +112,20 @@ Reference implementations are available for the Arduino development environments
 ****Fig. 3: Prototype Flute board (left) and finished battery-free EH nodes (right)****
 We evaluate the performance of Flute using two IoT daughter-boards described in Section 4 through a 7-day test deployed in Vietnam and Belgium under outdoor and indoor conditions. The boards were connected and ran the Flute software locally. Each of the 7-day experiment was performed at a different time,
 therefore absolute results of the graphs cannot be directly compared due to changing energy availability. However, the relative trends remain clear. From the results shown in Figures 4 and 5, label (A) denotes the maximumVoltage, (B) optimumVoltage, (C) shutOffVoltage plus a 10% safety margin and (D) NightOptimumVoltage, respectively. For the sleep time (E) represents maximumSleepTime, (F) nightMinimumSleepTime and (G) minimumSleepTime, respectively.
+
 ### 4.1. Outdoor Operation
-Figure 4 shows outdoor performance of baseline AsTAR compared to AsTAR++ for each of the two boards. AsTAR ensures reliability through a conservative approach; throttling software to a minimum of one execution every two hours at night when harvesting energy is unavailable. Conversely, when the sun rises, AsTAR rapidly acquires an optimum charge level and commensurately increases task rates. This daily pattern repeats throughout the experiment. Analysis of the nodes’ night-time behaviour reveals the AsTAR inefficiency; while nodes can safely operate down to 2.6V, the capacitor voltage never falls below 3.5V, leaving a large amount of unused charge. While this is reasonable with unpredictable EH scenarios, it is inefficient for diurnal scenarios.
+**Table 2: 1-week Flute message rate metrics for AsTAR and AsTAR++ across two deployment locations**
+<img width="1000" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/42b5e881-0478-4969-b8c4-11cf1d51f06e">
+
+Table 2 and Figure 4 shows outdoor performance of baseline AsTAR compared to AsTAR++ for each of the two boards. AsTAR ensures reliability through a conservative approach; throttling software to a minimum of one execution every two hours at night when harvesting energy is unavailable. Conversely, when the sun rises, AsTAR rapidly acquires an optimum charge level and commensurately increases task rates. This daily pattern repeats throughout the experiment. Analysis of the nodes’ night-time behaviour reveals the AsTAR inefficiency; while nodes can safely operate down to 2.6V, the capacitor voltage never falls below 3.5V, leaving a large amount of unused charge. While this is reasonable with unpredictable EH scenarios, it is inefficient for diurnal scenarios.
 In contrast, AsTAR++ tracks the night-time energy droughts length to safely use most of the available charge overnight. In all cases AsTAR++ reaches approximately 1.1x the brownout voltage of the daughter-board (2.86V for LoRa and 3.3V for LTE-M). This way, it efficiently uses the daytime charge, increasing messaging rates while preserving reliability with changing energy availability.
 Critically, Flute availability remains unaffected, delivering 100% using both algorithms. Our results demonstrate that in certain scenarios battery-free EH platforms can deliver very high levels of availability.
-
-**Table 1: User-defined energy drought task rates for AsTAR++**
-![Table1 drawio](https://github.com/LuckyMan23129/Flute/assets/141725842/76711c46-18d1-4482-a6cb-3905b8ce7c5a)
-
-
-**Table 2: 1-week Flute message rate metrics for AsTAR and AsTAR++ across two deployment locations**
-![Table 2](https://github.com/LuckyMan23129/Flute/assets/141725842/5b94967a-6a0d-4e9b-a337-eb3f80b3c89a)
-
 ![Fig 4](https://github.com/LuckyMan23129/Flute/assets/141725842/3fabbabe-a1c9-4904-abe5-f9065f58ecdd)
 
 ### 4.2. Indoor Operation
 ![Fig 5](https://github.com/LuckyMan23129/Flute/assets/141725842/a6b589f4-4324-4737-80c4-a8259c84928d)
 
-Figure 5 shows Flute indoor performance across the two locations. The indoor nodes received sunlight for just a few hours daily. Specifically, the nodes were deployed in summer of 2023 with many days of rain and inside of laboratories opening briefly without artificial lightening. Annotations (A) through (G) remain the same. The graphs 
+Table 2 and Figure 5 shows Flute indoor performance across the two locations. The indoor nodes received sunlight for just a few hours daily. Specifically, the nodes were deployed in summer of 2023 with many days of rain and inside of laboratories opening briefly without artificial lightening. Annotations (A) through (G) remain the same. The graphs 
 how that AsTAR and AsTAR++ algorithms ensure sustainable operation even with reduced amount of harvested solar energy when indoors. Additionally, AsTAR++ significantly outperforms AsTAR through more aggressive overnight energy use, without negatively impacting device availability.
 As shown in Table 2, with AsTAR, LoRa nodes achieve an average 0.51 messages per hour indoor and 2.47 outdoor. AsTAR++ improves messaging rate by over 16x for indoor and 5x for outdoor, respectively. With AsTAR, LTE-M nodes achieve an average 0.53 messages per hour while indoor and 6.84 outdoor. Again, AsTAR++ improves messaging by over 1.7x for indoor and 2.2x for outdoor.
 
