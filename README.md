@@ -13,10 +13,13 @@ We define the following requirements for the design of Flute:
 simplify task scheduling, time management, and handling power faults. Refer-
 ence implementations are available for the Arduino and Zephyr¶ development
 environments
-![Figure11](https://github.com/LuckyMan23129/Flute/assets/141725842/cfe9bf0a-529b-48e2-bc80-37559d8d2dcd)
+
+<img width="800" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/75bab354-0a51-4e70-870a-4a9e69547c28">
+
 **Fig 1.  Block diagram of the Flute PnP power board**
 
-![Figure2](https://github.com/LuckyMan23129/Flute/assets/141725842/38830606-cbdd-4c90-a091-20c9ea03b0f8)
+<img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/cdf80caf-2857-4250-a6d0-a94e76947a27">
+
 **Fig 2. The Flute Hardware/Software Architecture**
 
  The hardware goal of Flute is to convert commodity IoT development boards into battery-free EH devices. Flute’s software goal is to schedule tasks: (i.) as frequently as possible, while (ii.) accumulating an optimum charge level and (iii.) preserving system operation by throttling execution when environmental energy is lost. This requires a PnP power supply board and software support to manage energy usage.
@@ -66,7 +69,8 @@ Flute uses proposed AsTAR++ algorithm which manages energy droughts by tracking 
 The parameters of the proposed algorithms is described on Table 1 as follows:
 
 **Table 1: User-defined energy drought task rates for AsTAR++**
-<img width="600" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/12d5ea07-117e-4704-9371-36fcdc00ac64">
+
+<img width="500" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/12d5ea07-117e-4704-9371-36fcdc00ac64">
 
 
 
@@ -74,7 +78,7 @@ The parameters of the proposed algorithms is described on Table 1 as follows:
 ### 3.1. Applying the proposed AsTAR++ algorithm  on LTE-M nodes
 In this application, the circuitdojo_feather_nrf9160 board is used.
 
-<img width="500" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/8e5c1a75-011e-4c58-9604-d834a3b9f65b"> <img width="500" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/c5457a4d-94c8-4a32-a166-e696c6b28684">
+<img width="400" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/8e5c1a75-011e-4c58-9604-d834a3b9f65b"> <img width="400" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/c5457a4d-94c8-4a32-a166-e696c6b28684">
 
 **Fig 3. The image of Circuitdojo nrf9160**
 
@@ -115,7 +119,7 @@ therefore absolute results of the graphs cannot be directly compared due to chan
 
 ### 4.1. Outdoor Operation
 **Table 2: 1-week Flute message rate metrics for AsTAR and AsTAR++ across two deployment locations**
-<img width="1000" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/42b5e881-0478-4969-b8c4-11cf1d51f06e">
+<img width="600" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/42b5e881-0478-4969-b8c4-11cf1d51f06e">
 
 Table 2 and Figure 4 shows outdoor performance of baseline AsTAR compared to AsTAR++ for each of the two boards. AsTAR ensures reliability through a conservative approach; throttling software to a minimum of one execution every two hours at night when harvesting energy is unavailable. Conversely, when the sun rises, AsTAR rapidly acquires an optimum charge level and commensurately increases task rates. This daily pattern repeats throughout the experiment. Analysis of the nodes’ night-time behaviour reveals the AsTAR inefficiency; while nodes can safely operate down to 2.6V, the capacitor voltage never falls below 3.5V, leaving a large amount of unused charge. While this is reasonable with unpredictable EH scenarios, it is inefficient for diurnal scenarios.
 In contrast, AsTAR++ tracks the night-time energy droughts length to safely use most of the available charge overnight. In all cases AsTAR++ reaches approximately 1.1x the brownout voltage of the daughter-board (2.86V for LoRa and 3.3V for LTE-M). This way, it efficiently uses the daytime charge, increasing messaging rates while preserving reliability with changing energy availability.
