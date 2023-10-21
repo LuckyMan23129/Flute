@@ -77,7 +77,7 @@ In this application, the circuitdojo_feather_nrf9160 board is used.
 
 <img width="400" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/8e5c1a75-011e-4c58-9604-d834a3b9f65b"> <img width="400" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/c5457a4d-94c8-4a32-a166-e696c6b28684">
 
-**Fig 4. The image of Circuitdojo nrf9160**
+**Fig 3. The image of Circuitdojo nrf9160**
 
 The nRF9160 Feather by Circuit Dojo is a single-board development for bringing your LTE-M and NB-IoT applications to life. The circuitdojo_feather_nrf9160 board configuration leverages the pre-existing support for the Nordic Semiconductor nRF9160. Supported nRF9160 peripherals include:
 * ADC
@@ -110,7 +110,8 @@ Reference implementations are available for the Arduino development environments
 
 ## 4. Experimental results
 ![Biểu đồ không có tiêu đề drawio](https://github.com/LuckyMan23129/Flute/assets/141725842/6bff642e-8ed6-4e80-9e45-cfac93b6b6cc) 
-****Fig. 3: Prototype Flute board (left) and finished battery-free EH nodes (right)****
+**Fig. 4: Prototype Flute board (left) and finished battery-free EH nodes (right)**
+
 We evaluate the performance of Flute using two IoT daughter-boards described in Section 4 through a 7-day test deployed in Vietnam and Belgium under outdoor and indoor conditions. The boards were connected and ran the Flute software locally. Each of the 7-day experiment was performed at a different time,
 therefore absolute results of the graphs cannot be directly compared due to changing energy availability. However, the relative trends remain clear. From the results shown in Figures 4 and 5, label (A) denotes the maximumVoltage, (B) optimumVoltage, (C) shutOffVoltage plus a 10% safety margin and (D) NightOptimumVoltage, respectively. For the sleep time (E) represents maximumSleepTime, (F) nightMinimumSleepTime and (G) minimumSleepTime, respectively.
 
