@@ -24,7 +24,7 @@ environments
 
  The hardware goal of Flute is to convert commodity IoT development boards into battery-free EH devices. Flute’s software goal is to schedule tasks: (i.) as frequently as possible, while (ii.) accumulating an optimum charge level and (iii.) preserving system operation by throttling execution when environmental energy is lost. This requires a PnP power supply board and software support to manage energy usage.
 
-## 3. Installation and Sourcecode
+## 3. Implementation
 Flute aims to convert commodity IoT development boards into battery-free EH devices that can work in either outdoor or indoor environments reliably. To validate this, we employed long-range networking, 433MHz LoRa, and LTE-M, parameterized for low power and extended coverage. To show its deployment in the real world, we deployed Flute both outdoors and indoors and in 2 different countries in 2 different continents Vietnam and Belgium.
 The Psuedo code of proposed algorithms is shown as follows.
 ```javascript
@@ -70,8 +70,6 @@ The parameters of the proposed algorithms is described on Table 1 as follows:
 **Table 1: User-defined energy drought task rates for AsTAR++**
 
 <img width="500" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/12d5ea07-117e-4704-9371-36fcdc00ac64">
-
-
 
 
 ### 3.1. Applying the proposed AsTAR++ algorithm  on LTE-M nodes
