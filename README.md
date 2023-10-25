@@ -196,8 +196,11 @@ Below are some handy specifications of M0 RFM95 LoRa Radio board:
 <div align="justify"> Similar to LTE-M nodes, reference implementations are available for the Arduino development environments for outdoor and indoor LoRa 433MHz.  This facilitates developers to develop a battery-free LoRa IoT node more easily than ever. The detailed information on the source code, please see here https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B. </div>
 
 
-### 3.4. Implementing a LoRa 433MHz Gateway 
-In addition to the reference implementation for LoRa 433MHz nodes, we also implemented a one-channel 433MHz gateway. The image of the gateway is shown in <strong> Figure x </strong>.
+### 3.4. Implementing a LoRa 433MHz Gateway
+
+### * Hardware
+We also implemented a one-channel 433MHz gateway. The image of the gateway is shown in <strong> Figure x </strong>.
+</br>
 
 <p align="center">
    <img width="257" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/e6875b2f-76f7-40d2-ad01-6062f593266b">
@@ -207,8 +210,34 @@ In addition to the reference implementation for LoRa 433MHz nodes, we also imple
   <strong> Fig 6. The image of the one-channel 433MHz LoRa gateway  </strong>
 </div>
 
+<div align ="justify"> The Structure of the gateway consists of 2 main components <strong> Raspberry Pi 3 Model B </strong> and <strong> a RFM95W LoRa Radio Transceiver BR</strong>. The image of the LoRa Radio Transceiver is shown in the figure below. </div>
 
-<div align ="justify"> The Structure of the gateway consists of 2 main components a Raspi-3B and a
+<p align="center">
+   <img width="250" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/768a3d4c-250f-4298-a2cb-235aba6cba95">
+</p>
+<div align="center">
+  <strong> Fig 7. An image of RFM95W LoRa Radio Transceiver BR   </strong>
+</div>
+</br>
+
+The connection of the Raspi and the LoRa transceiver is depicted as follows.
+
+<p align="center">
+   <img width="500" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/c935f590-4646-4fb7-9ef6-c5fa7d7086b5">
+</p>
+<div align="center">
+  <strong> Fig 8. The connection of the Raspi and the LoRa transceiver  </strong>
+</div>
+</br>
+
+### * Software
+<div Align="justify"> For the software of Raspi, after installing Raspbian on the Raspberry Pi. From a console, run the following command to install the RFM9x Python package: </div>
+
+``` javascript
+pip3 install adafruit-circuitpython-rfm9x
+```
+
+<div Align="justify"> A Python script is run on Rasp to forward messages Raspi receives from the LoRa transceiver to the server. The reference Python script is shown at the link "xxxx". </div>
 
 
 
@@ -224,46 +253,34 @@ In addition to the reference implementation for LoRa 433MHz nodes, we also imple
 
 
 
-
-
-
-
-
-- Main link: https://www.digikey.be/nl/maker/projects/arduino-lora-weather-sensor/01ff62b930ce464da429222ddbc06854 
-
-
-
-
-
-
-
+[comment]: <> (Main link: https://www.digikey.be/nl/maker/projects/arduino-lora-weather-sensor/01ff62b930ce464da429222ddbc06854)
 
 ## 4. Experimental results
+<div Align="justify"> The Flute power board uses a standard connector for AdaFruit Feather format development boards. All boards are powered by four super-capacitors, selected based on high energy density and low ESR. Energy is harvested using two monocrystalline solar panels in parallel. Nodes are enclosed in waterproof
+cases for indoor and outdoor tests, as shown in the figure below. </div>
+</br>
 
 <p align="center">
    <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/67c01353-ba07-4d0d-8429-b08e52fc47ec">
 </p>
-
 **<div align="center">
-  Fig. 6: Prototype Flute board (left) and finished battery-free EH nodes (right)**
+  Fig. 9: Prototype Flute board (left) and finished battery-free EH nodes (right)**
 </div>
 
-
-
 <div align="justify"> We evaluate the performance of Flute using two IoT daughter-boards described in through a 7-day test deployed in Vietnam and Belgium under outdoor and indoor conditions. The boards were connected and ran the Flute software locally. Each of the 7-day experiments was performed at a different time,
-therefore absolute results of the graphs cannot be directly compared due to changing energy availability. However, the relative trends remain clear. From the results shown in <strong> Figures 7 </strong> and <strong> Figure 8</strong>, label (A) denotes the maximumVoltage, (B) optimumVoltage, (C) shutOffVoltage plus a 10% safety margin and (D) NightOptimumVoltage, respectively. For the sleep time (E) represents maximumSleepTime, (F) nightMinimumSleepTime and (G) minimumSleepTime, respectively. </div>
+therefore absolute results of the graphs cannot be directly compared due to changing energy availability. However, the relative trends remain clear. From the results shown in <strong> Figures 9 </strong> and <strong> Figure 10</strong>, label (A) denotes the maximumVoltage, (B) optimumVoltage, (C) shutOffVoltage plus a 10% safety margin and (D) NightOptimumVoltage, respectively. For the sleep time (E) represents maximumSleepTime, (F) nightMinimumSleepTime and (G) minimumSleepTime, respectively. </div>
 
 ### 4.1. Outdoor Operation
 
-**<div align="center">
-  Table 2: 1-week Flute message rate metrics for AsTAR and AsTAR++ across two deployment locations**
+<div align="center">
+  <strong> Table 2: 1-week Flute message rate metrics for AsTAR and AsTAR++ across two deployment locations </strong>
 </div>
 
 <p align="center">
    <img width="600" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/42b5e881-0478-4969-b8c4-11cf1d51f06e">
 </p>
 
-<div align="justify"> <strong> Table 2 </strong> and <strong> Figure 7 </strong> show outdoor performance of baseline AsTAR compared to AsTAR++ for each of the two boards. AsTAR ensures reliability through a conservative approach; throttling software to a minimum of one execution every two hours at night when harvesting energy is unavailable. Conversely, when the sun rises, AsTAR rapidly acquires an optimum charge level and commensurately increases task rates. This daily pattern repeats throughout the experiment. Analysis of the nodes’ night-time behaviour reveals the AsTAR inefficiency; while nodes can safely operate down to 2.6V, the capacitor voltage never falls below 3.5V, leaving a large amount of unused charge. While this is reasonable with unpredictable EH scenarios, it is inefficient for diurnal scenarios. </div>
+<div align="justify"> <strong> Table 2 </strong> and <strong> Figure 9 </strong> show outdoor performance of baseline AsTAR compared to AsTAR++ for each of the two boards. AsTAR ensures reliability through a conservative approach; throttling software to a minimum of one execution every two hours at night when harvesting energy is unavailable. Conversely, when the sun rises, AsTAR rapidly acquires an optimum charge level and commensurately increases task rates. This daily pattern repeats throughout the experiment. Analysis of the nodes’ night-time behaviour reveals the AsTAR inefficiency; while nodes can safely operate down to 2.6V, the capacitor voltage never falls below 3.5V, leaving a large amount of unused charge. While this is reasonable with unpredictable EH scenarios, it is inefficient for diurnal scenarios. </div>
 <div align="justify"> In contrast, AsTAR++ tracks the night-time energy droughts length to safely use most of the available charge overnight. In all cases, AsTAR++ reaches approximately 1.1x the brownout voltage of the daughter-board (2.86V for LoRa and 3.3V for LTE-M). This way, it efficiently uses the daytime charge, increasing messaging rates while preserving reliability with changing energy availability. </div>
 <div align="justify"> Critically, Flute availability remains unaffected, delivering 100% using both algorithms. Our results demonstrate that in certain scenarios battery-free EH platforms can deliver very high levels of availability. </div>
 
@@ -272,8 +289,8 @@ therefore absolute results of the graphs cannot be directly compared due to chan
    <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/7f03142c-3766-4233-a285-fba19f0bec7c">
 </p>
 
-**<div align="center">
-  Fig. 7: Outdoor performance graphs for AsTAR and AsTAR++ algorithms**
+<div align="center">
+  <strong> Fig. 9: Outdoor performance graphs for AsTAR and AsTAR++ algorithms </strong>
 </div>
 
 
@@ -284,11 +301,11 @@ therefore absolute results of the graphs cannot be directly compared due to chan
 </p>
 
 <div align="center">
-  <strong> Fig. 8: Indoor performance of AsTAR and AsTAR++ algorithms </strong>
+  <strong> Fig. 10: Indoor performance of AsTAR and AsTAR++ algorithms </strong>
 </div>
+</br>
 
-
-<div align="justify"> <strong> Table 2 </strong> and <strong> Figure 8 </strong> shows Flute indoor performance across the two locations. The indoor nodes received sunlight for just a few hours daily. Specifically, the nodes were deployed in summer of 2023 with many days of rain and inside of laboratories opening briefly without artificial lightening. Annotations (A) through (G) remain the same. The graphs show that AsTAR and AsTAR++ algorithms ensure sustainable operation even with reduced amount of harvested solar energy when indoors. Additionally, AsTAR++ significantly outperforms AsTAR through more aggressive overnight energy use, without negatively impacting device availability.
+<div align="justify"> <strong> Table 2 </strong> and <strong> Figure 10 </strong> shows Flute indoor performance across the two locations. The indoor nodes received sunlight for just a few hours daily. Specifically, the nodes were deployed in summer of 2023 with many days of rain and inside of laboratories opening briefly without artificial lightening. Annotations (A) through (G) remain the same. The graphs show that AsTAR and AsTAR++ algorithms ensure sustainable operation even with reduced amount of harvested solar energy when indoors. Additionally, AsTAR++ significantly outperforms AsTAR through more aggressive overnight energy use, without negatively impacting device availability.
 As shown in Table 2, with AsTAR, LoRa nodes achieve an average 0.51 messages per hour indoor and 2.47 outdoor. AsTAR++ improves messaging rate by over 16x for indoor and 5x for outdoor, respectively. With AsTAR, LTE-M nodes achieve an average 0.53 messages per hour while indoor and 6.84 outdoor. Again, AsTAR++ improves messaging by over 1.7x for indoor and 2.2x for outdoor. </div>
 
 ## 5. Contributions
