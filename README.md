@@ -33,7 +33,7 @@ We define the following requirements for the design of Flute:
 - <div align="justify"> <strong> Charge Storage </strong>: Flute’s charge storage <strong>(1)</strong> uses an array of up to four reconfigurable super-capacitors. As Flute aims to ensure sustainable operation, these capacitors should be sized to power the device at an acceptable duty cycle during the longest 
    expected energy droughts (i.e. periods with no environmental energy available). Capacitors with minimal leakage current and low Equivalent Series Resistance (ESR) are preferred. </div>
 
-- <div align="justify"> <strong> Charge Monitoring </strong>: Flute uses the ADC of the host development board to monitor the capacitor voltage via a 50% voltage divider circuit <strong> (2) </strong>. Large-value resistors are selected to minimize the power consumption of this circuit element. The remaining useful 
+- <div align="justify"> <strong> Charge Monitoring </strong>: Flute uses the ADC of the host development board to monitor the capacitor voltage via a 50% voltage divider circuit <strong> (2)</strong>. Large-value resistors are selected to minimize the power consumption of this circuit element. The remaining useful 
    charge is calculated based on the array size, voltage level and brownout voltage. </div>
 
  - <div align="justify"> <strong> Power Control </strong>: Most development boards using Flute have onboard regulators with different specifications and efficiencies. To address this heterogeneity, Flute supports two power management strategies. First, an efficient Real Time Clock (RTC) <strong> (3) </strong> 
@@ -142,14 +142,111 @@ For LTE_M nodes, the circuitdojo_feather_nrf9160 board is used.
 <div align="justify">  Besides, tutorials from Nordic will give you basic backgrounds to start implementing a Zephyr project for a Circuitdojo circuitdojo_feather_nrf9160. Please see at https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/topic/gpio-generic-api/ </div>
 
 <br/>
-<div align="justify"> In our work, we offer a <strong> reference code </strong> for outdoor and indoor LTE-M nodes that can help everyone refer to it to develop a Battery-free IoT application easily. The reference code is available at https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M. LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency. </div>
+<div align="justify"> In our work, we offer a <strong> reference code </strong> for outdoor and indoor LTE-M nodes that can help everyone refer to it to develop a Battery-free IoT application easily. The reference code is available at https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M/battery_free_flooding. LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency. </div>
 
 
 ### 3.2. Implementing LTE-M gateway
+<div Align="Justify"> For the LTE-M gateway, we run a Python script on our AWS server that works as a UDP gateway to forward messages from LTE-M nodes to our server. </div>div>
+In this work, we also contribute <strong> a reference code </strong> that can help developers develop their applications easier. The reference source code is shown as below:
+</br>
+
+```javascript
+import time
+import socket
+import struct
+from ctypes import *
+import sys
+from datetime import datetime
+from influxdb import InfluxDBClient
+import signal
+import os
+import json
+import logging
+
+imei_to_node =  {
+  "351516178705xxx": ["Table1_LTE", "Node_LTE1"],
+  "351516178705xxx": ["Table2_LTE", "Node_LTE2"]
+}
+
+my_influxdb_url = 'xxxxxxxxxxxxxxxxxx'            
+my_influxdb_port = xxxx
+my_influxdb_user = 'xxxxx'
+my_influxdb_passs = 'xxxxxxxxxxxxxxxx'
+my_influxdb_Database = 'xxxx'  
+
+logging.basicConfig(
+    filename="bffLog.log",
+    filemode='a',
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S')
+
+localIP = "2a05:d014:185:b700:b242:e1a4:b2f2:xxxx"
+recvPort = 7070
+buffersize = 4096
+host = ''
+try:
+    r = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
+    r.bind((host, recvPort))
+except:
+    logging.critical("Failed to bind port")
+    sys.exit(1)
+
+logFile = os.getcwd() + "/bffLog.log"
+
+def receiveMessage():
+    recvMsg, addr = r.recvfrom(buffersize)
+    devIP = addr[0]
+    devPort = addr[1]
+    try:
+        devIMEI = recvMsg[0:15].decode(encoding='UTF-8')
+    except:
+        logging.error("Couldn't parse devIMEI")
+        devIMEI = 0
+    try:
+        recvMilliVolt = int.from_bytes(recvMsg[15:17], byteorder='big', signed=False)
+    except:
+        logging.error("Couldn't parse recvMilliVolt")
+        recvMilliVolt = 0
+    try:
+        recvSleepTime = int.from_bytes(recvMsg[17:19], byteorder='big', signed=False)
+    except:
+        logging.error("Couldn't parse recvSleepTime")
+        recvSleepTime = 0
+    return recvMilliVolt, recvSleepTime, devIP, devPort, devIMEI
 
 
+if __name__ == "__main__":
+    logging.info("BFFSentry Started!")
+    while 1:
+        recvMilliVolt, recvSleepTime, devIP, devPort, devIMEI = receiveMessage()
+        # Filter out startup message (with max uint16_t values) 
+        if (recvMilliVolt == 65535) and (recvSleepTime == 65535):
+            logging.info("Node booted. IMEI: " + devIMEI)
+        else:
+            logging.info("[RX] IMEI: " + devIMEI + " " + str(recvMilliVolt) + "mV " + str(recvSleepTime) + "s")
+            if devIMEI in imei_to_node:
+                json_body = [
+                {
+                    "measurement": imei_to_node[devIMEI][0],           # Name of table
+                    "tags": {
+                        "Node": imei_to_node[devIMEI][1],              # Name of node
+                        "region": "Leuven"   
+                    },
+                    "time": datetime.utcnow(),                         # The time Node send data to InfluxDB
+                    "fields": {
+                
+                        "Water Level (Vietnam1)": recvSleepTime,                     # "Water" is the name of the first variable  which we need to send to InfluxDB
+                        "SuperCap (Vietnam1)": (float(recvMilliVolt)/1000),          # "SuperCap" is the name of the second variable which we need to send to InfluxDB
+                        "Temperature (Vietnam1)" : 30.0,                             # "SuperCap" is the name of third variable which we need to send to InfluxDB
+                    }
+                }
+                ]
 
-
+                InfluxDB_client = InfluxDBClient(my_influxdb_url, my_influxdb_port, my_influxdb_user, my_influxdb_passs, my_influxdb_Database)
+                InfluxDB_client.write_points(json_body)
+   
+```
 
 ### 3.3. Implementing the proposed AsTAR++ algorithm on 433Mhz nodes
 <div align="justify"> Regarding 433Mhz nodes, This work uses Adafruit Feather M0 RFM95 LoRa Radio (433MHz) board. The images and pinout of the board are shown in <strong> Figure 4 </strong> and <strong> Figure 5 </strong>. There are also a lot of pins and ports on the Feather M0 Radio board which is covered in-depth at https://learn.adafruit.com/adafruit-feather-m0-radio-with-lora-radio-module/pinouts 
