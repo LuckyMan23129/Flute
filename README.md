@@ -103,9 +103,34 @@ In our work, we offer a reference code for outdoor and indoor LTE-M Node availab
 LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency.
 
 ### 3.2. Applying the proposed AsTAR++ algorithm  on 433Mhz nodes
+ Regarding LTE_M nodes, This work uses Adafruit Feather M0 RFM95 LoRa Radio (433MHz) board.
+ 
+<img width="422" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/0b812eb8-f5f0-424e-94f7-d84e461dd5bc">
+
+**Fig 4. The image of Adafruit Feather M0 RFM95 LoRa Radio board**
+
+<img width="900" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/4f819ce6-3048-4e9f-8b2e-bac8cb6ae5bf">
+**Fig 5. The image of Adafruit Feather M0 RFM95 LoRa Radio board**
+
+
 Similar to LTE-M nodes, the reference source code for outdoor and indoor LoRa 433MHz is also described in a GitHub as follows: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B 
 
+
+
 Reference implementations are available for the Arduino development environments .............
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## 4. Experimental results
