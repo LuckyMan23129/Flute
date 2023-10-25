@@ -108,7 +108,7 @@ The parameters of the proposed algorithm is described in <strong> Table 1 </stro
 
 
 ## 3. Implementation
-### 3.1. Implementing the proposed AsTAR++ algorithm  on LTE-M nodes
+### 3.1. Implementing the proposed AsTAR++ algorithm on LTE-M nodes
 For LTE_M nodes, the circuitdojo_feather_nrf9160 board is used.
 
 <p align="center">
@@ -131,7 +131,13 @@ For LTE_M nodes, the circuitdojo_feather_nrf9160 board is used.
 <div align="justify"> In our work, we offer a <strong> reference code </strong> for outdoor and indoor LTE-M Node that can help everyone refer to it to develop a Battery-free IoT application easily. The reference code is available at https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M. LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency. </div>
 
 
-### 3.2. Implementing the proposed AsTAR++ algorithm on 433Mhz nodes
+### 3.2. Implementing LTE-M gateway
+
+
+
+
+
+### 3.3. Implementing the proposed AsTAR++ algorithm on 433Mhz nodes
 <div align="justify"> Regarding 433Mhz nodes, This work uses Adafruit Feather M0 RFM95 LoRa Radio (433MHz) board. The images and pinout of the board are shown in <strong> Figure 4 </strong> and <strong> Figure 5 </strong>. There are also a lot of pins and ports on the Feather M0 Radio board which is covered in-depth at https://learn.adafruit.com/adafruit-feather-m0-radio-with-lora-radio-module/pinouts 
 </div>
 
@@ -171,11 +177,27 @@ Below are some handy specifications of M0 RFM95 LoRa Radio board:
 - Reset button
 
 
-<div align="justify"> Similar to LTE-M nodes, the reference source code for outdoor and indoor LoRa 433MHz is also described in a GitHub as follows: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B </div>. This facilitates developers to develop a battery-free LoRa IoT node more easily than ever.
+<div align="justify"> Similar to LTE-M nodes, reference implementations are available for the Arduino development environments for outdoor and indoor LoRa 433MHz.  This facilitates developers to develop a battery-free LoRa IoT node more easily than ever. The detailed information on the source code, please see here https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B </div>. 
+</br>
 
 
 
-<div align="justify"> Reference implementations are available for the Arduino development environments ............. </div>
+### 3.4. Implementing LoRa 433MHz Gateway 
+In addition to the reference implementation for LoRa 433MHz nodes, we also implemented an one-channel 433MHz gateway
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div align="justify">  </div>
 
 
 
@@ -210,7 +232,7 @@ therefore absolute results of the graphs cannot be directly compared due to chan
 </p>
 
 <div align="justify"> <strong> Table 2 </strong> and <strong> Figure 7 </strong> show outdoor performance of baseline AsTAR compared to AsTAR++ for each of the two boards. AsTAR ensures reliability through a conservative approach; throttling software to a minimum of one execution every two hours at night when harvesting energy is unavailable. Conversely, when the sun rises, AsTAR rapidly acquires an optimum charge level and commensurately increases task rates. This daily pattern repeats throughout the experiment. Analysis of the nodes’ night-time behaviour reveals the AsTAR inefficiency; while nodes can safely operate down to 2.6V, the capacitor voltage never falls below 3.5V, leaving a large amount of unused charge. While this is reasonable with unpredictable EH scenarios, it is inefficient for diurnal scenarios. </div>
-<div align="justify"> In contrast, AsTAR++ tracks the night-time energy droughts length to safely use most of the available charge overnight. In all cases AsTAR++ reaches approximately 1.1x the brownout voltage of the daughter-board (2.86V for LoRa and 3.3V for LTE-M). This way, it efficiently uses the daytime charge, increasing messaging rates while preserving reliability with changing energy availability. </div>
+<div align="justify"> In contrast, AsTAR++ tracks the night-time energy droughts length to safely use most of the available charge overnight. In all cases, AsTAR++ reaches approximately 1.1x the brownout voltage of the daughter-board (2.86V for LoRa and 3.3V for LTE-M). This way, it efficiently uses the daytime charge, increasing messaging rates while preserving reliability with changing energy availability. </div>
 <div align="justify"> Critically, Flute availability remains unaffected, delivering 100% using both algorithms. Our results demonstrate that in certain scenarios battery-free EH platforms can deliver very high levels of availability. </div>
 
 <br/>
