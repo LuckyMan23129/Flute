@@ -119,7 +119,21 @@ For LTE_M nodes, the circuitdojo_feather_nrf9160 board is used.
   Fig 3. The image of Circuitdojo nrf9160**
 </div>
 
-<div align="justify">  The nRF9160 Feather by Circuit Dojo is a single-board development for bringing your LTE-M and NB-IoT applications to life. The circuitdojo_feather_nrf9160 board configuration leverages the pre-existing support for the Nordic Semiconductor nRF9160. Supported nRF9160 peripherals including ADC, CLOCK, FLASH, GPIO, I2C, MPU, NVIC, PWM, RTC, Segger RTT (RTT Console), SPI, UARTE, WDT, IDAU. </div>
+<div align="justify">  The nRF9160 Feather by Circuit Dojo is a single-board development for bringing your LTE-M and NB-IoT applications to life. The circuitdojo_feather_nrf9160 board configuration leverages the pre-existing support for the Nordic Semiconductor nRF9160. Supported nRF9160 peripherals such as: </div>
+- ADC 
+- CLOCK
+- FLASH
+- GPIO
+- I2C
+- MPU
+- NVIC
+- PWM
+- RTC
+- Segger RTT (RTT Console)
+- SPI
+- UARTE
+- WDT
+- IDAU. 
 
 <br/>
 <div align="justify">  It features a Nordic Semiconductor nRF9160-SICA part. This part is capable of both CAT M1 LTE and NB-IoT for communication with the outside world. It's compatible primarily with Zephyr via the nRF Connect SDK. More information about the board can be found at https://docs.circuitdojo.com/nrf9160-introduction.html. Reference implementations for the Zephyr development environments are shown at https://docs.zephyrproject.org/3.2.0/develop/tools/index.html. </div>
@@ -170,20 +184,34 @@ Below are some handy specifications of M0 RFM95 LoRa Radio board:
 - 8 x PWM pins
 - 10 x analog inputs
 - 1 x analog output
-- Built in 100mA lipoly charger with charging status indicator LED
+- Built-in 100mA lipoly charger with charging status indicator LED
 - Pin #13 red LED for general purpose blinking
 - Power/enable pin
 - 4 mounting holes
 - Reset button
 
 
-<div align="justify"> Similar to LTE-M nodes, reference implementations are available for the Arduino development environments for outdoor and indoor LoRa 433MHz.  This facilitates developers to develop a battery-free LoRa IoT node more easily than ever. The detailed information on the source code, please see here https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B </div>. 
+<div align="justify"> Similar to LTE-M nodes, reference implementations are available for the Arduino development environments for outdoor and indoor LoRa 433MHz.  This facilitates developers to develop a battery-free LoRa IoT node more easily than ever. The detailed information on the source code, please see here https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B. </div>
 </br>
 
 
 
-### 3.4. Implementing LoRa 433MHz Gateway 
-In addition to the reference implementation for LoRa 433MHz nodes, we also implemented an one-channel 433MHz gateway
+### 3.4. Implementing a LoRa 433MHz Gateway 
+In addition to the reference implementation for LoRa 433MHz nodes, we also implemented a one-channel 433MHz gateway. The image of the gateway is shown in <strong> Figure x </strong>.
+
+<p align="center">
+   <img width="257" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/e6875b2f-76f7-40d2-ad01-6062f593266b">
+</p>
+
+<div align="center">
+  <strong> Fig 6. The image of the Adafruit Feather M0 RFM95 LoRa Radio board </strong>
+</div>
+<br/>
+
+
+
+
+
 
 
 
