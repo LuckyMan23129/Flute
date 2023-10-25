@@ -84,14 +84,14 @@ The parameters of the proposed algorithms is described on Table 1 as follows:
 </div>
 
 <p align="center">
-   <img width="350" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/12d5ea07-117e-4704-9371-36fcdc00ac64">
+   <img width="450" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/12d5ea07-117e-4704-9371-36fcdc00ac64">
 </p>
 
 ### 3.1. Applying the proposed AsTAR++ algorithm  on LTE-M nodes
 For LTE_M nodes , the circuitdojo_feather_nrf9160 board is used.
 
 <p align="center">
-   <img width="350" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/8e5c1a75-011e-4c58-9604-d834a3b9f65b"> <img width="300" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/c5457a4d-94c8-4a32-a166-e696c6b28684">
+   <img width="350" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/8e5c1a75-011e-4c58-9604-d834a3b9f65b"> <img width="400" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/c5457a4d-94c8-4a32-a166-e696c6b28684">
 </p>
 
 **<div align="center">
@@ -128,7 +128,7 @@ LTE-M is a low-power cellular technology that reduces power through local Power 
 
 
 <p align="center">
-   <img width="300" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/0b812eb8-f5f0-424e-94f7-d84e461dd5bc">
+   <img width="270" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/0b812eb8-f5f0-424e-94f7-d84e461dd5bc">
 </p>
 
 **<div align="center">
@@ -137,7 +137,7 @@ LTE-M is a low-power cellular technology that reduces power through local Power 
 <br/>
 
 <p align="center">
-   <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/cab9d6c3-0283-4b41-871d-677b5416197f">
+   <img width="800" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/cab9d6c3-0283-4b41-871d-677b5416197f">
 </p>
 
 **<div align="center">
@@ -161,7 +161,7 @@ Reference implementations are available for the Arduino development environments
 ## 4. Experimental results
 
 <p align="center">
-   <img width="509" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/67c01353-ba07-4d0d-8429-b08e52fc47ec">
+   <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/67c01353-ba07-4d0d-8429-b08e52fc47ec">
 </p>
 
 **<div align="center">
