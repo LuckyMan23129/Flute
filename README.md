@@ -142,7 +142,7 @@ For LTE_M nodes, the circuitdojo_feather_nrf9160 board is used.
 <div align="justify">  Besides, tutorials from Nordic will give you basic backgrounds to start implementing a Zephyr project for a Circuitdojo circuitdojo_feather_nrf9160. Please see at https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/topic/gpio-generic-api/ </div>
 
 <br/>
-<div align="justify"> In our work, we offer a <strong> reference code </strong> for outdoor and indoor LTE-M Node that can help everyone refer to it to develop a Battery-free IoT application easily. The reference code is available at https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M. LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency. </div>
+<div align="justify"> In our work, we offer a <strong> reference code </strong> for outdoor and indoor LTE-M nodes that can help everyone refer to it to develop a Battery-free IoT application easily. The reference code is available at https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M. LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency. </div>
 
 
 ### 3.2. Implementing LTE-M gateway
@@ -209,6 +209,7 @@ We also implemented a one-channel 433MHz gateway. The image of the gateway is sh
 <div align="center">
   <strong> Fig 6. The image of the one-channel 433MHz LoRa gateway  </strong>
 </div>
+<br>
 
 <div align ="justify"> The Structure of the gateway consists of 2 main components <strong> Raspberry Pi 3 Model B </strong> and <strong> a RFM95W LoRa Radio Transceiver BR</strong>. The image of the LoRa Radio Transceiver is shown in the figure below. </div>
 
@@ -263,9 +264,10 @@ cases for indoor and outdoor tests, as shown in the figure below. </div>
 <p align="center">
    <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/67c01353-ba07-4d0d-8429-b08e52fc47ec">
 </p>
-**<div align="center">
-  Fig. 9: Prototype Flute board (left) and finished battery-free EH nodes (right)**
+<div align="center">
+  <strong> Fig. 9: Prototype Flute board (left) and finished battery-free EH nodes (right) </strong>
 </div>
+</br>
 
 <div align="justify"> We evaluate the performance of Flute using two IoT daughter-boards described in through a 7-day test deployed in Vietnam and Belgium under outdoor and indoor conditions. The boards were connected and ran the Flute software locally. Each of the 7-day experiments was performed at a different time,
 therefore absolute results of the graphs cannot be directly compared due to changing energy availability. However, the relative trends remain clear. From the results shown in <strong> Figures 9 </strong> and <strong> Figure 10</strong>, label (A) denotes the maximumVoltage, (B) optimumVoltage, (C) shutOffVoltage plus a 10% safety margin and (D) NightOptimumVoltage, respectively. For the sleep time (E) represents maximumSleepTime, (F) nightMinimumSleepTime and (G) minimumSleepTime, respectively. </div>
