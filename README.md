@@ -146,8 +146,8 @@ For LTE_M nodes, the circuitdojo_feather_nrf9160 board is used.
 
 
 ### 3.2. Implementing LTE-M gateway
-<div Align="Justify"> For the LTE-M gateway, we run a Python script on our AWS server that works as an UDP gateway to forward messages from LTE-M nodes to our server. </div>div>
-In this work, we also contribute <strong> a reference code </strong> that can help developers develop their applications easier. The reference source code is shown as below:
+<div Align="Justify"> For the LTE-M gateway, we run a Python script on our AWS server that works as a UDP gateway to forward messages from LTE-M nodes to our server. </div>
+In this work, we also contribute <strong> a reference code </strong> that can help developers develop their applications easier. The reference source code is shown below:
 </br>
 
 ```javascript
@@ -296,7 +296,7 @@ Below are some handy specifications of M0 RFM95 LoRa Radio board:
 ### 3.4. Implementing a LoRa 433MHz Gateway
 
 ### * Hardware
-We also implemented a one-channel 433MHz gateway. The image of the gateway is shown in <strong> Figure x </strong>.
+We also implemented a one-channel 433MHz gateway. The image of the gateway is shown in the figure below.
 </br>
 
 <p align="center">
@@ -335,20 +335,7 @@ The connection of the Raspi and the LoRa transceiver is depicted as follows.
 pip3 install adafruit-circuitpython-rfm9x
 ```
 
-<div Align="justify"> A Python script is run on Rasp to forward messages Raspi receives from the LoRa transceiver to the server. The reference Python script is shown at the link "xxxx". </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div Align="justify"> A Python script is run on Rasp to forward messages Raspi receives from the LoRa transceiver to the server. The reference Python script is shown at this link "xxxx". </div>
 
 
 [comment]: <> (Main link: https://www.digikey.be/nl/maker/projects/arduino-lora-weather-sensor/01ff62b930ce464da429222ddbc06854)
