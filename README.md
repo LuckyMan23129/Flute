@@ -171,11 +171,7 @@ Below are some handy specifications of M0 RFM95 LoRa Radio board:
 - Reset button
 
 
-
-
-
-
-<div align="justify"> Similar to LTE-M nodes, the reference source code for outdoor and indoor LoRa 433MHz is also described in a GitHub as follows: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B </div>
+<div align="justify"> Similar to LTE-M nodes, the reference source code for outdoor and indoor LoRa 433MHz is also described in a GitHub as follows: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B </div>. This facilitates developers to develop a battery-free LoRa IoT node more easily than ever.
 
 
 
