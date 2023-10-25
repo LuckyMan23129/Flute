@@ -146,7 +146,7 @@ For LTE_M nodes, the circuitdojo_feather_nrf9160 board is used.
 
 
 ### 3.2. Implementing LTE-M gateway
-<div Align="Justify"> For the LTE-M gateway, we run a Python script on our AWS server that works as a UDP gateway to forward messages from LTE-M nodes to our server. </div>div>
+<div Align="Justify"> For the LTE-M gateway, we run a Python script on our AWS server that works as an UDP gateway to forward messages from LTE-M nodes to our server. </div>div>
 In this work, we also contribute <strong> a reference code </strong> that can help developers develop their applications easier. The reference source code is shown as below:
 </br>
 
