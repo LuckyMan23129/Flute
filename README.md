@@ -9,7 +9,7 @@
 </div>
 
 
-## 2. The Design of Flute 
+## 2. Flute Design 
 We define the following requirements for the design of Flute:
 - <div align="justify"> First, <strong> Low power duty cycling </strong>: Sustainable EH requires aggressive duty cycling. However, the power efficiency of IoT development boards varies dramatically. Flute addresses this problem via a power board that allows the host board to be powered down or placed into deep sleep mode between executions. </div>
 
@@ -19,7 +19,7 @@ We define the following requirements for the design of Flute:
 
 - <div align="justify"> Finally, <strong> Developer support </strong>: Flute contributes energy management libraries that simplify task scheduling, time management, and handling power faults. Reference implementations are available for the Arduino and Zephyr development environments.  </div>
 
-
+### 2.1. Flute Hardware
 <p align="center">
    <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/75bab354-0a51-4e70-870a-4a9e69547c28">
 </p>
@@ -41,6 +41,11 @@ We define the following requirements for the design of Flute:
     use its digital power switch to completely power down the board during sleep, mitigating design inefficiencies. To prevent power leakage, I2C and ADC lines are also isolated during power down. The output of the capacitors is regulated using the onboard regulator. </div>
 
 
+<div align="justify"> The hardware goal of Flute is to convert commodity IoT development boards into battery-free EH devices. Flute’s software goal is to schedule tasks: (i.) as frequently as possible, while (ii.) accumulating an optimum charge level and (iii.) preserving system operation by throttling execution when environmental energy is lost. This requires a PnP power supply board and software support to manage energy usage. <div/>
+
+
+### 2.2.  Flute Software 
+
 <p align="center">
    <img width="650" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/cdf80caf-2857-4250-a6d0-a94e76947a27">
 </p>
@@ -49,9 +54,6 @@ We define the following requirements for the design of Flute:
   Fig 2. The Flute Hardware/Software Architecture**
 </div>
 
-<div align="justify"> The hardware goal of Flute is to convert commodity IoT development boards into battery-free EH devices. Flute’s software goal is to schedule tasks: (i.) as frequently as possible, while (ii.) accumulating an optimum charge level and (iii.) preserving system operation by throttling execution when environmental energy is lost. This requires a PnP power supply board and software support to manage energy usage. <div/>
-
-## 3. Implementation
 <div align="justify"> Flute aims to convert commodity IoT development boards into battery-free EH devices that can work in either outdoor or indoor environments reliably. To validate this, we employed long-range networking, 433MHz LoRa, and LTE-M, parameterized for low power and extended coverage. To show its deployment in the real world, we deployed Flute both outdoors and indoors and in 2 different countries on 2 different continents Vietnam and Belgium. </div>
 The pseudo-code of the proposed algorithms is shown as follows.
 
@@ -104,8 +106,10 @@ The parameters of the proposed algorithms is described on Table 1 as follows:
    <img width="450" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/12d5ea07-117e-4704-9371-36fcdc00ac64">
 </p>
 
-### 3.1. Deploying the proposed AsTAR++ algorithm  on LTE-M nodes
-For LTE_M nodes , the circuitdojo_feather_nrf9160 board is used.
+
+## 3. Implementation
+### 3.1. Implementing the proposed AsTAR++ algorithm  on LTE-M nodes
+For LTE_M nodes, the circuitdojo_feather_nrf9160 board is used.
 
 <p align="center">
    <img width="350" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/8e5c1a75-011e-4c58-9604-d834a3b9f65b"> <img width="400" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/c5457a4d-94c8-4a32-a166-e696c6b28684">
@@ -126,7 +130,7 @@ For LTE_M nodes , the circuitdojo_feather_nrf9160 board is used.
 <div align="justify"> In our work, we offer a reference code for outdoor and indoor LTE-M Node available at: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M that can help everyone refer to it to develop a Battery-free IoT application easily. LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency. </div>
 
 
-### 3.2. Deploying the proposed AsTAR++ algorithm  on 433Mhz nodes
+### 3.2. Implementing the proposed AsTAR++ algorithm on 433Mhz nodes
 <div align="justify"> Regarding 433Mhz nodes, This work uses Adafruit Feather M0 RFM95 LoRa Radio (433MHz) board. The images and pinout of the board are shown in **Figure 4** and **Figure 5**. There are also a lot of pins and ports on the Feather M0 Radio board. For more information, please see at this link:
 https://learn.adafruit.com/adafruit-feather-m0-radio-with-lora-radio-module/pinouts 
 </div>
