@@ -14,19 +14,30 @@ simplify task scheduling, time management, and handling power faults. Refer-
 ence implementations are available for the Arduino and Zephyr¶ development
 environments
 
-<img width="800" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/75bab354-0a51-4e70-870a-4a9e69547c28">
+<p align="center">
+   <img width="800" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/75bab354-0a51-4e70-870a-4a9e69547c28">
+</p>
 
-**Fig 1.  Block diagram of the Flute PnP power board**
+**<div align="center">
+  Fig 1.  Block diagram of the Flute PnP power board**
+</div>
+<br/>
 
-<img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/cdf80caf-2857-4250-a6d0-a94e76947a27">
 
-**Fig 2. The Flute Hardware/Software Architecture**
+<p align="center">
+   <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/cdf80caf-2857-4250-a6d0-a94e76947a27">
+</p>
+
+**<div align="center">
+  Fig 2. The Flute Hardware/Software Architecture**
+</div>
 
  The hardware goal of Flute is to convert commodity IoT development boards into battery-free EH devices. Flute’s software goal is to schedule tasks: (i.) as frequently as possible, while (ii.) accumulating an optimum charge level and (iii.) preserving system operation by throttling execution when environmental energy is lost. This requires a PnP power supply board and software support to manage energy usage.
 
 ## 3. Implementation
 Flute aims to convert commodity IoT development boards into battery-free EH devices that can work in either outdoor or indoor environments reliably. To validate this, we employed long-range networking, 433MHz LoRa, and LTE-M, parameterized for low power and extended coverage. To show its deployment in the real world, we deployed Flute both outdoors and indoors and in 2 different countries in 2 different continents Vietnam and Belgium.
 The Psuedo code of proposed algorithms is shown as follows.
+
 ```javascript
 1    getAdaptedRate ( V_New , V_Prev ) {
 2    IF ( V_New - V_Prev ) < 0 for last 10 minutes AND V_New <= V_Day_Optimum
@@ -63,21 +74,29 @@ The Psuedo code of proposed algorithms is shown as follows.
 33   RETURN T_Sleep
 34   }
 ```
+
 Flute uses proposed AsTAR++ algorithm which manages energy droughts by tracking the duration of power outages using an Exponentially Weighted Moving Average. When an energy drought is detected based on 10 minutes of no charge gain (e.g. sunset), Flute changes strategies, aiming to schedule tasks at such a rate that 90% of the available charge is used by the expected end of the energy drought (e.g. sunrise). Once charge accumulation resumes, Flute reverts to the standard, conservative, AsTAR strategy. In this way, available energy is more fully exploited overnight.
 
 The parameters of the proposed algorithms is described on Table 1 as follows:
 
-**Table 1: User-defined energy drought task rates for AsTAR++**
+**<div align="center">
+  Table 1: User-defined energy drought task rates for AsTAR++**
+</div>
 
-<img width="500" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/12d5ea07-117e-4704-9371-36fcdc00ac64">
-
+<p align="center">
+   <img width="350" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/12d5ea07-117e-4704-9371-36fcdc00ac64">
+</p>
 
 ### 3.1. Applying the proposed AsTAR++ algorithm  on LTE-M nodes
 For LTE_M nodes , the circuitdojo_feather_nrf9160 board is used.
 
-<img width="400" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/8e5c1a75-011e-4c58-9604-d834a3b9f65b"> <img width="400" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/c5457a4d-94c8-4a32-a166-e696c6b28684">
+<p align="center">
+   <img width="350" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/8e5c1a75-011e-4c58-9604-d834a3b9f65b"> <img width="300" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/c5457a4d-94c8-4a32-a166-e696c6b28684">
+</p>
 
-**Fig 3. The image of Circuitdojo nrf9160**
+**<div align="center">
+  Fig 3. The image of Circuitdojo nrf9160**
+</div>
 
 The nRF9160 Feather by Circuit Dojo is a single-board development for bringing your LTE-M and NB-IoT applications to life. The circuitdojo_feather_nrf9160 board configuration leverages the pre-existing support for the Nordic Semiconductor nRF9160. Supported nRF9160 peripherals include:
 * ADC
@@ -102,15 +121,28 @@ Besides, tutorials from Nordic (see also at https://academy.nordicsemi.com/cours
 In our work, we offer a reference code for outdoor and indoor LTE-M Node available at: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M that can help everyone on it to develop a Battery-free IoT application easily. 
 LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency.
 
+
+
 ### 3.2. Applying the proposed AsTAR++ algorithm  on 433Mhz nodes
  Regarding LTE_M nodes, This work uses Adafruit Feather M0 RFM95 LoRa Radio (433MHz) board.
- 
-<img width="422" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/0b812eb8-f5f0-424e-94f7-d84e461dd5bc">
 
-**Fig 4. The image of Adafruit Feather M0 RFM95 LoRa Radio board**
 
-<img width="900" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/4f819ce6-3048-4e9f-8b2e-bac8cb6ae5bf">
-**Fig 5. The image of Adafruit Feather M0 RFM95 LoRa Radio board**
+<p align="center">
+   <img width="300" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/0b812eb8-f5f0-424e-94f7-d84e461dd5bc">
+</p>
+
+**<div align="center">
+  Fig 4. The image of the Adafruit Feather M0 RFM95 LoRa Radio board**
+</div>
+<br/>
+
+<p align="center">
+   <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/cab9d6c3-0283-4b41-871d-677b5416197f">
+</p>
+
+**<div align="center">
+  Fig 5. The image of Adafruit Feather M0 RFM95 LoRa Radio board**
+</div>
 
 
 Similar to LTE-M nodes, the reference source code for outdoor and indoor LoRa 433MHz is also described in a GitHub as follows: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B 
@@ -126,39 +158,56 @@ Reference implementations are available for the Arduino development environments
 
 
 
-
-
-
-
-
-
-
 ## 4. Experimental results
-![Biểu đồ không có tiêu đề drawio](https://github.com/LuckyMan23129/Flute/assets/141725842/6bff642e-8ed6-4e80-9e45-cfac93b6b6cc) 
-**Fig. 4: Prototype Flute board (left) and finished battery-free EH nodes (right)**
+
+<p align="center">
+   <img width="509" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/67c01353-ba07-4d0d-8429-b08e52fc47ec">
+</p>
+
+**<div align="center">
+  Fig. 6: Prototype Flute board (left) and finished battery-free EH nodes (right)**
+</div>
+
+
 
 We evaluate the performance of Flute using two IoT daughter-boards described in through a 7-day test deployed in Vietnam and Belgium under outdoor and indoor conditions. The boards were connected and ran the Flute software locally. Each of the 7-day experiment was performed at a different time,
 therefore absolute results of the graphs cannot be directly compared due to changing energy availability. However, the relative trends remain clear. From the results shown in Figures 5 and 6, label (A) denotes the maximumVoltage, (B) optimumVoltage, (C) shutOffVoltage plus a 10% safety margin and (D) NightOptimumVoltage, respectively. For the sleep time (E) represents maximumSleepTime, (F) nightMinimumSleepTime and (G) minimumSleepTime, respectively.
 
 ### 4.1. Outdoor Operation
-**Table 2: 1-week Flute message rate metrics for AsTAR and AsTAR++ across two deployment locations**
-<img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/42b5e881-0478-4969-b8c4-11cf1d51f06e">
 
-Table 2 and Figure 5 shows outdoor performance of baseline AsTAR compared to AsTAR++ for each of the two boards. AsTAR ensures reliability through a conservative approach; throttling software to a minimum of one execution every two hours at night when harvesting energy is unavailable. Conversely, when the sun rises, AsTAR rapidly acquires an optimum charge level and commensurately increases task rates. This daily pattern repeats throughout the experiment. Analysis of the nodes’ night-time behaviour reveals the AsTAR inefficiency; while nodes can safely operate down to 2.6V, the capacitor voltage never falls below 3.5V, leaving a large amount of unused charge. While this is reasonable with unpredictable EH scenarios, it is inefficient for diurnal scenarios.
+**<div align="center">
+  Table 2: 1-week Flute message rate metrics for AsTAR and AsTAR++ across two deployment locations**
+</div>
+
+<p align="center">
+   <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/42b5e881-0478-4969-b8c4-11cf1d51f06e">
+</p>
+
+Table 2 and Figure 7 shows outdoor performance of baseline AsTAR compared to AsTAR++ for each of the two boards. AsTAR ensures reliability through a conservative approach; throttling software to a minimum of one execution every two hours at night when harvesting energy is unavailable. Conversely, when the sun rises, AsTAR rapidly acquires an optimum charge level and commensurately increases task rates. This daily pattern repeats throughout the experiment. Analysis of the nodes’ night-time behaviour reveals the AsTAR inefficiency; while nodes can safely operate down to 2.6V, the capacitor voltage never falls below 3.5V, leaving a large amount of unused charge. While this is reasonable with unpredictable EH scenarios, it is inefficient for diurnal scenarios.
 In contrast, AsTAR++ tracks the night-time energy droughts length to safely use most of the available charge overnight. In all cases AsTAR++ reaches approximately 1.1x the brownout voltage of the daughter-board (2.86V for LoRa and 3.3V for LTE-M). This way, it efficiently uses the daytime charge, increasing messaging rates while preserving reliability with changing energy availability.
 Critically, Flute availability remains unaffected, delivering 100% using both algorithms. Our results demonstrate that in certain scenarios battery-free EH platforms can deliver very high levels of availability.
 
-<img width="850" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/7f03142c-3766-4233-a285-fba19f0bec7c">
+<p align="center">
+   <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/7f03142c-3766-4233-a285-fba19f0bec7c">
+</p>
 
-****Fig. 5: Outdoor performance graphs for AsTAR and AsTAR++ algorithms****
+**<div align="center">
+  Fig. 7: Outdoor performance graphs for AsTAR and AsTAR++ algorithms**
+</div>
+
 
 ### 4.2. Indoor Operation
 
-<img width="850" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/b0ffbbb8-8c4b-4d3f-8629-59e4b558858b">
+<p align="center">
+   <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/b0ffbbb8-8c4b-4d3f-8629-59e4b558858b">
+</p>
 
-****Fig. 6: Indoor performance of AsTAR and AsTAR++ algorithms****
+**<div align="center">
+  Fig. 8: Indoor performance of AsTAR and AsTAR++ algorithms**
+</div>
 
-Table 2 and Figure 6 shows Flute indoor performance across the two locations. The indoor nodes received sunlight for just a few hours daily. Specifically, the nodes were deployed in summer of 2023 with many days of rain and inside of laboratories opening briefly without artificial lightening. Annotations (A) through (G) remain the same. The graphs 
+
+Table 2 and Figure 8 shows Flute indoor performance across the two locations. The indoor nodes received sunlight for just a few hours daily. Specifically, the nodes were deployed in summer of 2023 with many days of rain and inside of laboratories opening briefly without artificial lightening. Annotations (A) through (G) remain the same. The graphs 
 how that AsTAR and AsTAR++ algorithms ensure sustainable operation even with reduced amount of harvested solar energy when indoors. Additionally, AsTAR++ significantly outperforms AsTAR through more aggressive overnight energy use, without negatively impacting device availability.
 As shown in Table 2, with AsTAR, LoRa nodes achieve an average 0.51 messages per hour indoor and 2.47 outdoor. AsTAR++ improves messaging rate by over 16x for indoor and 5x for outdoor, respectively. With AsTAR, LTE-M nodes achieve an average 0.53 messages per hour while indoor and 6.84 outdoor. Again, AsTAR++ improves messaging by over 1.7x for indoor and 2.2x for outdoor.
 
