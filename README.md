@@ -125,15 +125,14 @@ For LTE_M nodes, the circuitdojo_feather_nrf9160 board is used.
 <div align="justify">  It features a Nordic Semiconductor nRF9160-SICA part. This part is capable of both CAT M1 LTE and NB-IoT for communication with the outside world. It's compatible primarily with Zephyr via the nRF Connect SDK. More information about the board can be found at https://docs.circuitdojo.com/nrf9160-introduction.html. Reference implementations for the Zephyr development environments are shown at https://docs.zephyrproject.org/3.2.0/develop/tools/index.html. </div>
 
 <br/>
-<div align="justify">  Besides, tutorials from Nordic will give you basic backgrounds to start implementing a zephyr Project for a Circuitdojo circuitdojo_feather_nrf9160. Please see at https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/topic/gpio-generic-api/ </div>
+<div align="justify">  Besides, tutorials from Nordic will give you basic backgrounds to start implementing a Zephyr project for a Circuitdojo circuitdojo_feather_nrf9160. Please see at https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/topic/gpio-generic-api/ </div>
 
 <br/>
 <div align="justify"> In our work, we offer a <strong> reference code </strong> for outdoor and indoor LTE-M Node that can help everyone refer to it to develop a Battery-free IoT application easily. The reference code is available at https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M. LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency. </div>
 
 
 ### 3.2. Implementing the proposed AsTAR++ algorithm on 433Mhz nodes
-<div align="justify"> Regarding 433Mhz nodes, This work uses Adafruit Feather M0 RFM95 LoRa Radio (433MHz) board. The images and pinout of the board are shown in <strong> Figure 4 </strong> and <strong> Figure 5 </strong>. There are also a lot of pins and ports on the Feather M0 Radio board. For more information, please see at this link:
-https://learn.adafruit.com/adafruit-feather-m0-radio-with-lora-radio-module/pinouts 
+<div align="justify"> Regarding 433Mhz nodes, This work uses Adafruit Feather M0 RFM95 LoRa Radio (433MHz) board. The images and pinout of the board are shown in <strong> Figure 4 </strong> and <strong> Figure 5 </strong>. There are also a lot of pins and ports on the Feather M0 Radio board which is covered in-depth at https://learn.adafruit.com/adafruit-feather-m0-radio-with-lora-radio-module/pinouts 
 </div>
 
  </br> 
@@ -153,6 +152,27 @@ https://learn.adafruit.com/adafruit-feather-m0-radio-with-lora-radio-module/pino
 **<div align="center">
   Fig 5. The image of Adafruit Feather M0 RFM95 LoRa Radio board**
 </div>
+
+Below are some handy specifications of M0 RFM95 LoRa Radio board:
+- Measures 2.0" x 0.9" x 0.3" (51mm x 23mm x 8mm) without headers soldered in
+- Light as a (large?) feather - 5.8 grams
+- ATSAMD21G18 @ 48MHz with 3.3V logic/power
+- No EEPROM
+- 3.3V regulator with 500mA peak current output USB native support, comes with USB bootloader and serial port debugging
+- You also get tons of pins - 20 GPIO pins
+- Hardware Serial, hardware I2C, hardware SPI support
+- 8 x PWM pins
+- 10 x analog inputs
+- 1 x analog output
+- Built in 100mA lipoly charger with charging status indicator LED
+- Pin #13 red LED for general purpose blinking
+- Power/enable pin
+- 4 mounting holes
+- Reset button
+
+
+
+
 
 
 <div align="justify"> Similar to LTE-M nodes, the reference source code for outdoor and indoor LoRa 433MHz is also described in a GitHub as follows: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B </div>
@@ -180,8 +200,8 @@ https://learn.adafruit.com/adafruit-feather-m0-radio-with-lora-radio-module/pino
 
 
 
-<div align="justify"> We evaluate the performance of Flute using two IoT daughter-boards described in through a 7-day test deployed in Vietnam and Belgium under outdoor and indoor conditions. The boards were connected and ran the Flute software locally. Each of the 7-day experiment was performed at a different time,
-therefore absolute results of the graphs cannot be directly compared due to changing energy availability. However, the relative trends remain clear. From the results shown in <strong> Figures 7 </strong> and <strong> Figure 8 </strong>, label (A) denotes the maximumVoltage, (B) optimumVoltage, (C) shutOffVoltage plus a 10% safety margin and (D) NightOptimumVoltage, respectively. For the sleep time (E) represents maximumSleepTime, (F) nightMinimumSleepTime and (G) minimumSleepTime, respectively. </div>
+<div align="justify"> We evaluate the performance of Flute using two IoT daughter-boards described in through a 7-day test deployed in Vietnam and Belgium under outdoor and indoor conditions. The boards were connected and ran the Flute software locally. Each of the 7-day experiments was performed at a different time,
+therefore absolute results of the graphs cannot be directly compared due to changing energy availability. However, the relative trends remain clear. From the results shown in <strong> Figures 7 </strong> and <strong> Figure 8</strong>, label (A) denotes the maximumVoltage, (B) optimumVoltage, (C) shutOffVoltage plus a 10% safety margin and (D) NightOptimumVoltage, respectively. For the sleep time (E) represents maximumSleepTime, (F) nightMinimumSleepTime and (G) minimumSleepTime, respectively. </div>
 
 ### 4.1. Outdoor Operation
 
