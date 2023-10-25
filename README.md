@@ -1,42 +1,42 @@
-# Flute: Enabling a Battery-free and Energy Harvesting Ecosystem for the Internet of Things
 
+#<div align="center"> 
+   # Flute: Enabling a Battery-free and Energy Harvesting Ecosystem for the Internet of Things
+</div>
 
 ## 1. Description
-Nowadays, most Internet of Things (IoT) devices still operate on batteries, offering lifetimes of just a few years; leading to high maintenance costs and excess waste. Energy Harvesting (EH) in combination with super-capacitor charge storage offers a solution, however, it is considered complex and unreliable, hampering its real-world deployment. To address this problem, we contribute Flute, a power management system for building battery-free IoT deployments. Unlike prior work, Flute focuses on transforming existing IoT development boards into battery-free devices. Reliable operation is achieved through a combination of generic power management hardware and self-adaptive software enabling sustainable operation in the face of dynamic power supply and demand. We evaluate our approach through a series of diverse one-week solar EH scenarios and show that Flute efficiently harvests energy and achieves reliable operation for a range of unmodified IoT development boards using LTE-M and LoRa. Hence, Flute provides a promising foundation for building a battery-free and EH ecosystem for the Internet of Things.
+<div align="justify">
+   Nowadays, most Internet of Things (IoT) devices still operate on batteries, offering lifetimes of just a few years; leading to high maintenance costs and excess waste. Energy Harvesting (EH) in combination with super-capacitor charge storage offers a solution, however, it is considered complex and unreliable, hampering its real-world deployment. To address this problem, we contribute Flute, a power management system for building battery-free IoT deployments. Unlike prior work, Flute focuses on transforming existing IoT development boards into battery-free devices. Reliable operation is achieved through a combination of generic power management hardware and self-adaptive software enabling sustainable operation in the face of dynamic power supply and demand. We evaluate our approach through a series of diverse one-week solar EH scenarios and show that Flute efficiently harvests energy and achieves reliable operation for a range of unmodified IoT development boards using LTE-M and LoRa. Hence, Flute provides a promising foundation for building a battery-free and EH ecosystem for the Internet of Things.
+</div>
 
 ## 2. The Design of Flute
 We define the following requirements for the design of Flute:
-- First, **Low power duty cycling**: Sustainable EH requires aggressive duty cycling. However, the power efficiency of IoT development boards varies dramatically. Flute addresses this problem via a power board that allows the host board to be powered down or placed into deep sleep mode between executions.
-- Second, **Adaptive task scheduling**: Intelligent scheduling is required to tailor application energy demands to match available energy supply. However, additional support is required to enable more consistent scheduling in the case of diurnal EH patterns.
-- Third, **PnP operation**: Flute will support the existing ecosystem of IoT development boards by offering the first PnP battery-free and EH solution for the boards, specifically focusing on the Adafruit Feather due to its extensive range and popularity.
-- Finally, **Developer support**: Flute contributes energy management libraries that
-simplify task scheduling, time management, and handling power faults. Refer-
-ence implementations are available for the Arduino and Zephyr¶ development
-environments
+- <div align="justify"> First, Low power duty cycling: Sustainable EH requires aggressive duty cycling. However, the power efficiency of IoT development boards varies dramatically. Flute addresses this problem via a power board that allows the host board to be powered down or placed into deep sleep mode between executions. </div>
+- <div align="justify"> Second, Adaptive task scheduling: Intelligent scheduling is required to tailor application energy demands to match available energy supply. However, additional support is required to enable more consistent scheduling in the case of diurnal EH patterns.  </div>
+- <div align="justify"> Third, PnP operation: Flute will support the existing ecosystem of IoT development boards by offering the first PnP battery-free and EH solution for the boards, specifically focusing on the Adafruit Feather due to its extensive range and popularity.  </div>
+- <div align="justify"> Finally, Developer support: Flute contributes energy management libraries that simplify task scheduling, time management, and handling power faults. Reference implementations are available for the Arduino and Zephyr development environments.  </div>
+
 
 <p align="center">
-   <img width="800" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/75bab354-0a51-4e70-870a-4a9e69547c28">
+   <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/75bab354-0a51-4e70-870a-4a9e69547c28">
 </p>
 
 **<div align="center">
   Fig 1.  Block diagram of the Flute PnP power board**
 </div>
-<br/>
-
 
 <p align="center">
-   <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/cdf80caf-2857-4250-a6d0-a94e76947a27">
+   <img width="650" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/cdf80caf-2857-4250-a6d0-a94e76947a27">
 </p>
 
 **<div align="center">
   Fig 2. The Flute Hardware/Software Architecture**
 </div>
 
- The hardware goal of Flute is to convert commodity IoT development boards into battery-free EH devices. Flute’s software goal is to schedule tasks: (i.) as frequently as possible, while (ii.) accumulating an optimum charge level and (iii.) preserving system operation by throttling execution when environmental energy is lost. This requires a PnP power supply board and software support to manage energy usage.
+<div align="justify"> The hardware goal of Flute is to convert commodity IoT development boards into battery-free EH devices. Flute’s software goal is to schedule tasks: (i.) as frequently as possible, while (ii.) accumulating an optimum charge level and (iii.) preserving system operation by throttling execution when environmental energy is lost. This requires a PnP power supply board and software support to manage energy usage. <div/>
 
 ## 3. Implementation
-Flute aims to convert commodity IoT development boards into battery-free EH devices that can work in either outdoor or indoor environments reliably. To validate this, we employed long-range networking, 433MHz LoRa, and LTE-M, parameterized for low power and extended coverage. To show its deployment in the real world, we deployed Flute both outdoors and indoors and in 2 different countries in 2 different continents Vietnam and Belgium.
-The Psuedo code of proposed algorithms is shown as follows.
+<div align="justify"> Flute aims to convert commodity IoT development boards into battery-free EH devices that can work in either outdoor or indoor environments reliably. To validate this, we employed long-range networking, 433MHz LoRa, and LTE-M, parameterized for low power and extended coverage. To show its deployment in the real world, we deployed Flute both outdoors and indoors and in 2 different countries on 2 different continents Vietnam and Belgium. </div>
+The pseudo-code of the proposed algorithms is shown as follows.
 
 ```javascript
 1    getAdaptedRate ( V_New , V_Prev ) {
@@ -75,7 +75,7 @@ The Psuedo code of proposed algorithms is shown as follows.
 34   }
 ```
 
-Flute uses proposed AsTAR++ algorithm which manages energy droughts by tracking the duration of power outages using an Exponentially Weighted Moving Average. When an energy drought is detected based on 10 minutes of no charge gain (e.g. sunset), Flute changes strategies, aiming to schedule tasks at such a rate that 90% of the available charge is used by the expected end of the energy drought (e.g. sunrise). Once charge accumulation resumes, Flute reverts to the standard, conservative, AsTAR strategy. In this way, available energy is more fully exploited overnight.
+<div align="justify"> Flute uses the proposed AsTAR++ algorithm which manages energy droughts by tracking the duration of power outages using an Exponentially Weighted Moving Average. When an energy drought is detected based on 10 minutes of no charge gain (e.g. sunset), Flute changes strategies, aiming to schedule tasks at such a rate that 90% of the available charge is used by the expected end of the energy drought (e.g. sunrise). Once charge accumulation resumes, Flute reverts to the standard, conservative, AsTAR strategy. In this way, available energy is more fully exploited overnight. </div>
 
 The parameters of the proposed algorithms is described on Table 1 as follows:
 
@@ -98,7 +98,8 @@ For LTE_M nodes , the circuitdojo_feather_nrf9160 board is used.
   Fig 3. The image of Circuitdojo nrf9160**
 </div>
 
-The nRF9160 Feather by Circuit Dojo is a single-board development for bringing your LTE-M and NB-IoT applications to life. The circuitdojo_feather_nrf9160 board configuration leverages the pre-existing support for the Nordic Semiconductor nRF9160. Supported nRF9160 peripherals include:
+<div align="justify">  The nRF9160 Feather by Circuit Dojo is a single-board development for bringing your LTE-M and NB-IoT applications to life. The circuitdojo_feather_nrf9160 board configuration leverages the pre-existing support for the Nordic Semiconductor nRF9160. Supported nRF9160 peripherals include: </div>
+
 * ADC
 * CLOCK
 * FLASH
@@ -114,12 +115,16 @@ The nRF9160 Feather by Circuit Dojo is a single-board development for bringing y
 * WDT
 * IDAU
 
-It features a Nordic Semiconductor nRF9160-SICA part. This part is capable of both CAT M1 LTE and NB-IoT for communication with the outside world. It's compatible primarily with Zephyr via the nRF Connect SDK. More information about the board can be found at the https://docs.circuitdojo.com/nrf9160-introduction.html. Reference implementations for the Zephyr development environments is shown at: https://docs.zephyrproject.org/3.2.0/develop/tools/index.html
+<div align="justify">  It features a Nordic Semiconductor nRF9160-SICA part. This part is capable of both CAT M1 LTE and NB-IoT for communication with the outside world. It's compatible primarily with Zephyr via the nRF Connect SDK. More information about the board can be found at the https://docs.circuitdojo.com/nrf9160-introduction.html. Reference implementations for the Zephyr development environments is shown at: https://docs.zephyrproject.org/3.2.0/develop/tools/index.html. </div>
 
-Besides, tutorials from Nordic (see also at https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/topic/gpio-generic-api/) will give you basic backgrounds so that you can start implementing a zephyr Project for a Circuitdojo circuitdojo_feather_nrf9160.
+<br/>
+<div align="justify">  Besides, tutorials from Nordic (see also at https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/topic/gpio-generic-api/) will give you basic backgrounds so that you can start implementing a zephyr Project for a Circuitdojo circuitdojo_feather_nrf9160. </div>
 
-In our work, we offer a reference code for outdoor and indoor LTE-M Node available at: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M that can help everyone on it to develop a Battery-free IoT application easily. 
-LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency.
+<br/>
+<div align="justify"> In our work, we offer a reference code for outdoor and indoor LTE-M Node available at: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M that can help everyone on it to develop a Battery-free IoT application easily. </div>
+
+<br/>
+<div align="justify"> LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency. </div>
 
 
 
@@ -145,11 +150,11 @@ LTE-M is a low-power cellular technology that reduces power through local Power 
 </div>
 
 
-Similar to LTE-M nodes, the reference source code for outdoor and indoor LoRa 433MHz is also described in a GitHub as follows: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B 
+<div align="justify"> Similar to LTE-M nodes, the reference source code for outdoor and indoor LoRa 433MHz is also described in a GitHub as follows: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LoRa%20AsTAR%2B%2B </div>
 
 
 
-Reference implementations are available for the Arduino development environments .............
+<div align="justify"> Reference implementations are available for the Arduino development environments ............. </div>
 
 
 
@@ -170,8 +175,8 @@ Reference implementations are available for the Arduino development environments
 
 
 
-We evaluate the performance of Flute using two IoT daughter-boards described in through a 7-day test deployed in Vietnam and Belgium under outdoor and indoor conditions. The boards were connected and ran the Flute software locally. Each of the 7-day experiment was performed at a different time,
-therefore absolute results of the graphs cannot be directly compared due to changing energy availability. However, the relative trends remain clear. From the results shown in Figures 5 and 6, label (A) denotes the maximumVoltage, (B) optimumVoltage, (C) shutOffVoltage plus a 10% safety margin and (D) NightOptimumVoltage, respectively. For the sleep time (E) represents maximumSleepTime, (F) nightMinimumSleepTime and (G) minimumSleepTime, respectively.
+<div align="justify"> We evaluate the performance of Flute using two IoT daughter-boards described in through a 7-day test deployed in Vietnam and Belgium under outdoor and indoor conditions. The boards were connected and ran the Flute software locally. Each of the 7-day experiment was performed at a different time,
+therefore absolute results of the graphs cannot be directly compared due to changing energy availability. However, the relative trends remain clear. From the results shown in Figures 5 and 6, label (A) denotes the maximumVoltage, (B) optimumVoltage, (C) shutOffVoltage plus a 10% safety margin and (D) NightOptimumVoltage, respectively. For the sleep time (E) represents maximumSleepTime, (F) nightMinimumSleepTime and (G) minimumSleepTime, respectively. </div>
 
 ### 4.1. Outdoor Operation
 
@@ -183,9 +188,9 @@ therefore absolute results of the graphs cannot be directly compared due to chan
    <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/42b5e881-0478-4969-b8c4-11cf1d51f06e">
 </p>
 
-Table 2 and Figure 7 shows outdoor performance of baseline AsTAR compared to AsTAR++ for each of the two boards. AsTAR ensures reliability through a conservative approach; throttling software to a minimum of one execution every two hours at night when harvesting energy is unavailable. Conversely, when the sun rises, AsTAR rapidly acquires an optimum charge level and commensurately increases task rates. This daily pattern repeats throughout the experiment. Analysis of the nodes’ night-time behaviour reveals the AsTAR inefficiency; while nodes can safely operate down to 2.6V, the capacitor voltage never falls below 3.5V, leaving a large amount of unused charge. While this is reasonable with unpredictable EH scenarios, it is inefficient for diurnal scenarios.
-In contrast, AsTAR++ tracks the night-time energy droughts length to safely use most of the available charge overnight. In all cases AsTAR++ reaches approximately 1.1x the brownout voltage of the daughter-board (2.86V for LoRa and 3.3V for LTE-M). This way, it efficiently uses the daytime charge, increasing messaging rates while preserving reliability with changing energy availability.
-Critically, Flute availability remains unaffected, delivering 100% using both algorithms. Our results demonstrate that in certain scenarios battery-free EH platforms can deliver very high levels of availability.
+<div align="justify"> Table 2 and Figure 7 show outdoor performance of baseline AsTAR compared to AsTAR++ for each of the two boards. AsTAR ensures reliability through a conservative approach; throttling software to a minimum of one execution every two hours at night when harvesting energy is unavailable. Conversely, when the sun rises, AsTAR rapidly acquires an optimum charge level and commensurately increases task rates. This daily pattern repeats throughout the experiment. Analysis of the nodes’ night-time behaviour reveals the AsTAR inefficiency; while nodes can safely operate down to 2.6V, the capacitor voltage never falls below 3.5V, leaving a large amount of unused charge. While this is reasonable with unpredictable EH scenarios, it is inefficient for diurnal scenarios. </div>
+<div align="justify"> In contrast, AsTAR++ tracks the night-time energy droughts length to safely use most of the available charge overnight. In all cases AsTAR++ reaches approximately 1.1x the brownout voltage of the daughter-board (2.86V for LoRa and 3.3V for LTE-M). This way, it efficiently uses the daytime charge, increasing messaging rates while preserving reliability with changing energy availability. </div>
+<div align="justify"> Critically, Flute availability remains unaffected, delivering 100% using both algorithms. Our results demonstrate that in certain scenarios battery-free EH platforms can deliver very high levels of availability. </div>
 
 <p align="center">
    <img width="700" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/7f03142c-3766-4233-a285-fba19f0bec7c">
@@ -207,17 +212,16 @@ Critically, Flute availability remains unaffected, delivering 100% using both al
 </div>
 
 
-Table 2 and Figure 8 shows Flute indoor performance across the two locations. The indoor nodes received sunlight for just a few hours daily. Specifically, the nodes were deployed in summer of 2023 with many days of rain and inside of laboratories opening briefly without artificial lightening. Annotations (A) through (G) remain the same. The graphs 
-how that AsTAR and AsTAR++ algorithms ensure sustainable operation even with reduced amount of harvested solar energy when indoors. Additionally, AsTAR++ significantly outperforms AsTAR through more aggressive overnight energy use, without negatively impacting device availability.
-As shown in Table 2, with AsTAR, LoRa nodes achieve an average 0.51 messages per hour indoor and 2.47 outdoor. AsTAR++ improves messaging rate by over 16x for indoor and 5x for outdoor, respectively. With AsTAR, LTE-M nodes achieve an average 0.53 messages per hour while indoor and 6.84 outdoor. Again, AsTAR++ improves messaging by over 1.7x for indoor and 2.2x for outdoor.
+<div align="justify"> Table 2 and Figure 8 shows Flute indoor performance across the two locations. The indoor nodes received sunlight for just a few hours daily. Specifically, the nodes were deployed in summer of 2023 with many days of rain and inside of laboratories opening briefly without artificial lightening. Annotations (A) through (G) remain the same. The graphs show that AsTAR and AsTAR++ algorithms ensure sustainable operation even with reduced amount of harvested solar energy when indoors. Additionally, AsTAR++ significantly outperforms AsTAR through more aggressive overnight energy use, without negatively impacting device availability.
+As shown in Table 2, with AsTAR, LoRa nodes achieve an average 0.51 messages per hour indoor and 2.47 outdoor. AsTAR++ improves messaging rate by over 16x for indoor and 5x for outdoor, respectively. With AsTAR, LTE-M nodes achieve an average 0.53 messages per hour while indoor and 6.84 outdoor. Again, AsTAR++ improves messaging by over 1.7x for indoor and 2.2x for outdoor. </div>
 
 ## 5. Contributions
-Contributions of this paper facilitate the vision of a battery-free EH IoT by enabling PnP conversion of commodity dev-boards into battery-free EH platforms. A week-long evaluation of our approach shows a promising performance profile. Specifically, Flute sustainably supports simple wireless sensing applications in both indoor and outdoor scenarios running on multiple networks and processors using solar power alone. Moreover, with diurnal operation, Flute outperforms the original AsTAR algorithm by a factor of 2x to 17x while always maintaining a 10% safety margin, well over the brown-out voltage.
+<div align="justify"> Contributions of this work facilitate the vision of a battery-free EH IoT by enabling PnP conversion of commodity dev-boards into battery-free EH platforms. A week-long evaluation of our approach shows a promising performance profile. Specifically, Flute sustainably supports simple wireless sensing applications in both indoor and outdoor scenarios running on multiple networks and processors using solar power alone. Moreover, with diurnal operation, Flute outperforms the original AsTAR algorithm by a factor of 2x to 17x while always maintaining a 10% safety margin, well over the brown-out voltage. </div>
 
 ## 6. Future work
-Our future work will focus on three scientific tracks: (i.) Improving self-adaptive energy management by broadening its scope beyond the application layer and integrating it into the OS and network. (ii.) Implementing approaches to simplify developer construction of complex multi-tasking schedules. (iii.) Broadening Flute evaluation to include more EH methods like thermal, RF and kinetic. Additionally, as an engineering track, we intend to establish large-scale Flute deployments in multiple locations for a year-long study across seasons.
+<div align="justify">   Our future work will focus on three scientific tracks: (i.) Improving self-adaptive energy management by broadening its scope beyond the application layer and integrating it into the OS and network. (ii.) Implementing approaches to simplify developer construction of complex multi-tasking schedules. (iii.) Broadening Flute evaluation to include more EH methods like thermal, RF and kinetic. Additionally, as an engineering track, we intend to establish large-scale Flute deployments in multiple locations for a year-long study across seasons. </div>
 
 ## 7. Authors and acknowledgment
-This work is partially funded by VLIR-UOS (IUC-QNU/KU Leuven, VN2022IUC044A101), the KU Leuven Research Fund (ReSOS, C3/20/014), and VLAIO
-(TRUSTI, HBC.2021.0742).
+<div align="justify"> This work is partially funded by VLIR-UOS (IUC-QNU/KU Leuven, VN2022IUC044A101), the KU Leuven Research Fund (ReSOS, C3/20/014), and VLAIO
+(TRUSTI, HBC.2021.0742). </div>
 
