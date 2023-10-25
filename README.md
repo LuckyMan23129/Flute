@@ -8,12 +8,16 @@
    Nowadays, most Internet of Things (IoT) devices still operate on batteries, offering lifetimes of just a few years; leading to high maintenance costs and excess waste. Energy Harvesting (EH) in combination with super-capacitor charge storage offers a solution, however, it is considered complex and unreliable, hampering its real-world deployment. To address this problem, we contribute Flute, a power management system for building battery-free IoT deployments. Unlike prior work, Flute focuses on transforming existing IoT development boards into battery-free devices. Reliable operation is achieved through a combination of generic power management hardware and self-adaptive software enabling sustainable operation in the face of dynamic power supply and demand. We evaluate our approach through a series of diverse one-week solar EH scenarios and show that Flute efficiently harvests energy and achieves reliable operation for a range of unmodified IoT development boards using LTE-M and LoRa. Hence, Flute provides a promising foundation for building a battery-free and EH ecosystem for the Internet of Things.
 </div>
 
-## 2. The Design of Flute
+
+## 2. The Design of Flute 
 We define the following requirements for the design of Flute:
-- <div align="justify"> First, Low power duty cycling: Sustainable EH requires aggressive duty cycling. However, the power efficiency of IoT development boards varies dramatically. Flute addresses this problem via a power board that allows the host board to be powered down or placed into deep sleep mode between executions. </div>
-- <div align="justify"> Second, Adaptive task scheduling: Intelligent scheduling is required to tailor application energy demands to match available energy supply. However, additional support is required to enable more consistent scheduling in the case of diurnal EH patterns.  </div>
-- <div align="justify"> Third, PnP operation: Flute will support the existing ecosystem of IoT development boards by offering the first PnP battery-free and EH solution for the boards, specifically focusing on the Adafruit Feather due to its extensive range and popularity.  </div>
-- <div align="justify"> Finally, Developer support: Flute contributes energy management libraries that simplify task scheduling, time management, and handling power faults. Reference implementations are available for the Arduino and Zephyr development environments.  </div>
+- <div align="justify"> First, <strong> Low power duty cycling </strong>: Sustainable EH requires aggressive duty cycling. However, the power efficiency of IoT development boards varies dramatically. Flute addresses this problem via a power board that allows the host board to be powered down or placed into deep sleep mode between executions. </div>
+
+- <div align="justify"> Second, <strong> Adaptive task scheduling </strong>: Intelligent scheduling is required to tailor application energy demands to match available energy supply. However, additional support is required to enable more consistent scheduling in the case of diurnal EH patterns.  </div>
+
+- <div align="justify"> Third, <strong> PnP operation </strong>: Flute will support the existing ecosystem of IoT development boards by offering the first PnP battery-free and EH solution for the boards, specifically focusing on the Adafruit Feather due to its extensive range and popularity.  </div>
+
+- <div align="justify"> Finally, <strong> Developer support </strong>: Flute contributes energy management libraries that simplify task scheduling, time management, and handling power faults. Reference implementations are available for the Arduino and Zephyr development environments.  </div>
 
 
 <p align="center">
@@ -23,6 +27,19 @@ We define the following requirements for the design of Flute:
 **<div align="center">
   Fig 1.  Block diagram of the Flute PnP power board**
 </div>
+
+<strong> Figure 1 </strong> provides a high-level block diagram of the power board and each block is then explained as follows:
+
+- <div align="justify"> <strong> Charge Storage </strong>: Flute’s charge storage <strong>(1)</strong> uses an array of up to four reconfigurable super-capacitors. As Flute aims to ensure sustainable operation, these capacitors should be sized to power the device at an acceptable duty cycle during the longest 
+   expected energy droughts (i.e. periods with no environmental energy available). Capacitors with minimal leakage current and low Equivalent Series Resistance (ESR) are preferred. </div>
+
+- <div align="justify"> <strong> Charge Monitoring </strong>: Flute uses the ADC of the host development board to monitor the capacitor voltage via a 50% voltage divider circuit <strong> (2) </strong>. Large-value resistors are selected to minimize the power consumption of this circuit element. The remaining useful 
+   charge is calculated based on the array size, voltage level and brownout voltage. </div>
+
+ - <div align="justify"> <strong> Power Control </strong>: Most development boards using Flute have onboard regulators with different specifications and efficiencies. To address this heterogeneity, Flute supports two power management strategies. First, an efficient Real Time Clock (RTC) <strong> (3) </strong> 
+   provides a common sleep timer with power consumption under 50nA. The sleep timer can be used in two ways. For boards with acceptable sleep power, the MCU can enter deep sleep and the RTC is used to wake it based on an external interrupt. For boards with prohibitive sleep power, the RTC can
+    use its digital power switch to completely power down the board during sleep, mitigating design inefficiencies. To prevent power leakage, I2C and ADC lines are also isolated during power down. The output of the capacitors is regulated using the onboard regulator. </div>
+
 
 <p align="center">
    <img width="650" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/cdf80caf-2857-4250-a6d0-a94e76947a27">
@@ -87,7 +104,7 @@ The parameters of the proposed algorithms is described on Table 1 as follows:
    <img width="450" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/12d5ea07-117e-4704-9371-36fcdc00ac64">
 </p>
 
-### 3.1. Applying the proposed AsTAR++ algorithm  on LTE-M nodes
+### 3.1. Deploying the proposed AsTAR++ algorithm  on LTE-M nodes
 For LTE_M nodes , the circuitdojo_feather_nrf9160 board is used.
 
 <p align="center">
@@ -98,40 +115,23 @@ For LTE_M nodes , the circuitdojo_feather_nrf9160 board is used.
   Fig 3. The image of Circuitdojo nrf9160**
 </div>
 
-<div align="justify">  The nRF9160 Feather by Circuit Dojo is a single-board development for bringing your LTE-M and NB-IoT applications to life. The circuitdojo_feather_nrf9160 board configuration leverages the pre-existing support for the Nordic Semiconductor nRF9160. Supported nRF9160 peripherals include: </div>
+<div align="justify">  The nRF9160 Feather by Circuit Dojo is a single-board development for bringing your LTE-M and NB-IoT applications to life. The circuitdojo_feather_nrf9160 board configuration leverages the pre-existing support for the Nordic Semiconductor nRF9160. Supported nRF9160 peripherals include: ADC, CLOCK, FLASH, GPIO, I2C, MPU, NVIC, PWM, RTC, Segger RTT (RTT Console), SPI, UARTE, WDT, IDAU. </div>
 
-* ADC
-* CLOCK
-* FLASH
-* GPIO
-* I2C
-* MPU
-* NVIC
-* PWM
-* RTC
-* Segger RTT (RTT Console)
-* SPI
-* UARTE
-* WDT
-* IDAU
-
-<div align="justify">  It features a Nordic Semiconductor nRF9160-SICA part. This part is capable of both CAT M1 LTE and NB-IoT for communication with the outside world. It's compatible primarily with Zephyr via the nRF Connect SDK. More information about the board can be found at the https://docs.circuitdojo.com/nrf9160-introduction.html. Reference implementations for the Zephyr development environments is shown at: https://docs.zephyrproject.org/3.2.0/develop/tools/index.html. </div>
+<div align="justify">  It features a Nordic Semiconductor nRF9160-SICA part. This part is capable of both CAT M1 LTE and NB-IoT for communication with the outside world. It's compatible primarily with Zephyr via the nRF Connect SDK. More information about the board can be found at https://docs.circuitdojo.com/nrf9160-introduction.html. Reference implementations for the Zephyr development environments are shown at: https://docs.zephyrproject.org/3.2.0/develop/tools/index.html. </div>
 
 <br/>
-<div align="justify">  Besides, tutorials from Nordic (see also at https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/topic/gpio-generic-api/) will give you basic backgrounds so that you can start implementing a zephyr Project for a Circuitdojo circuitdojo_feather_nrf9160. </div>
+<div align="justify">  Tutorials from Nordic (see also at https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/topic/gpio-generic-api/) will give you basic backgrounds to start implementing a zephyr Project for a Circuitdojo circuitdojo_feather_nrf9160. </div>
 
 <br/>
-<div align="justify"> In our work, we offer a reference code for outdoor and indoor LTE-M Node available at: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M that can help everyone on it to develop a Battery-free IoT application easily. </div>
-
-<br/>
-<div align="justify"> LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency. </div>
+<div align="justify"> In our work, we offer a reference code for outdoor and indoor LTE-M Node available at: https://github.com/LuckyMan23129/Flute/tree/master/Source%20code/LTE-M that can help everyone refer to it to develop a Battery-free IoT application easily. LTE-M is a low-power cellular technology that reduces power through local Power Saving Mode (PSM) or extended Discontinuous Reception. Therefore, due to no downlink in our LTE-M application, the PSM was set longer than the sleep time, ensuring immediate return after sending data over UDP and power efficiency. </div>
 
 
+### 3.2. Deploying the proposed AsTAR++ algorithm  on 433Mhz nodes
+<div align="justify"> Regarding 433Mhz nodes, This work uses Adafruit Feather M0 RFM95 LoRa Radio (433MHz) board. The images and pinout of the board are shown in **Figure 4** and **Figure 5**. There are also a lot of pins and ports on the Feather M0 Radio board. For more information, please see at this link:
+https://learn.adafruit.com/adafruit-feather-m0-radio-with-lora-radio-module/pinouts 
+</div>
 
-### 3.2. Applying the proposed AsTAR++ algorithm  on 433Mhz nodes
- Regarding LTE_M nodes, This work uses Adafruit Feather M0 RFM95 LoRa Radio (433MHz) board.
-
-
+ </br> 
 <p align="center">
    <img width="270" alt="image" src="https://github.com/LuckyMan23129/Flute/assets/141725842/0b812eb8-f5f0-424e-94f7-d84e461dd5bc">
 </p>
