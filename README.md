@@ -335,7 +335,7 @@ The connection of the Raspi and the LoRa transceiver is depicted as follows.
 pip3 install adafruit-circuitpython-rfm9x
 ```
 
-<div Align="justify"> A Python script is run on Rasp to forward messages Raspi receives from the LoRa transceiver to the server. The reference Python script is shown at this link "xxxx". </div>
+<div Align="justify"> A Python script is run on Raspi to forward messages Raspi receives from the LoRa transceiver to the server. The reference Python script is shown at this link "xxxx". </div>
 
 
 [comment]: <> (Main link: https://www.digikey.be/nl/maker/projects/arduino-lora-weather-sensor/01ff62b930ce464da429222ddbc06854)
