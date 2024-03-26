@@ -1,0 +1,15 @@
+{
+    "git.enabled": false,
+    "git.path": null,
+    "git.autofetch": false,
+    "files.associations": {
+        "gpio.h": "c",
+        "adc.h": "c",
+        "devicetree.h": "c",
+        "device.h": "c",
+        "kernel.h": "c",
+        "util.h": "c"
+    },
+    "nrf-connect.toolchain.path": "${nrf-connect.toolchain:2.2.0}",
+    "nrf-connect.topdir": "${nrf-connect.sdk:2.2.0}"
+}

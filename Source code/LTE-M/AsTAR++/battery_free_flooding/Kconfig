@@ -1,0 +1,26 @@
+menu "UDP Sample Settings"
+
+config UDP_SERVER_ADDRESS_STATIC
+	string "UDP server IP address"
+	default "0"
+
+config UDP_SERVER_PORT
+	int "UDP server port number"
+	default "7070"
+
+config UDP_PSM_ENABLE
+	bool "Enable LTE Power Saving Mode"
+	default y
+
+config UDP_EDRX_ENABLE
+	bool "Enable LTE enhanced Discontinuous Reception"
+	default n
+endmenu
+
+module = UDP
+module-str = UDP sample
+source "${ZEPHYR_BASE}/subsys/logging/Kconfig.template.log_config"
+
+menu "Zephyr Kernel"
+source "Kconfig.zephyr"
+endmenu
